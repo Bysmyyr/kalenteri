@@ -198,6 +198,12 @@ main {
   border-color: #667eea;
 }
 
+.location-card.highlighted-card {
+  border-color: #667eea;
+  border-width: 3px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
 .location-card .day-badge {
   position: absolute;
   top: 1rem;

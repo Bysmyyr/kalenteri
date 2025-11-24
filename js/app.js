@@ -282,12 +282,36 @@
   
   function moveCardToTop(day) {
     const listContainer = document.getElementById('locationsList');
-    const cards = Array.from(listContainer.children);
-    const clickedCard = cards.find(card => parseInt(card.dataset.day) === day);
     
-    if (clickedCard) {
-      listContainer.insertBefore(clickedCard, listContainer.firstChild);
+    // Remove any existing highlighted card at the top
+    const existingHighlight = listContainer.querySelector('.highlighted-card');
+    if (existingHighlight) {
+      existingHighlight.remove();
     }
+    
+    // Find the location data
+    const location = locations.find(loc => loc.day === day);
+    if (!location) return;
+    
+    // Create a copy of the card
+    const highlightedCard = document.createElement('div');
+    highlightedCard.className = 'location-card highlighted-card';
+    highlightedCard.dataset.day = location.day;
+    highlightedCard.innerHTML = `
+      ${location.image ? `<img src="${location.image}" alt="${location.name}" class="card-image">` : ''}
+      <div class="day-badge">${location.day}</div>
+      <h3>${location.name}</h3>
+      <div class="date">${location.day}. joulukuuta 2025</div>
+      <div class="description">${location.description}</div>
+    `;
+    
+    // Add click handler to the highlighted card
+    highlightedCard.addEventListener('click', () => {
+      setActiveLocation(location.day);
+    });
+    
+    // Insert at the top
+    listContainer.insertBefore(highlightedCard, listContainer.firstChild);
   }
 
   function renderLocationsList() {
