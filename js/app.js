@@ -244,7 +244,7 @@
     return `
       <div class="popup-content">
         <h3>${location.name}</h3>
-        <div class="date">December ${location.day}, 2024</div>
+        <div class="date">${location.day}. joulukuuta 2025</div>
         <div class="description">${location.description}</div>
         ${location.image ? `<img src="${location.image}" alt="${location.name}">` : ''}
       </div>
@@ -261,7 +261,7 @@
       <div class="location-card" data-day="${location.day}">
         <div class="day-badge">${location.day}</div>
         <h3>${location.name}</h3>
-        <div class="date">December ${location.day}, 2024</div>
+        <div class="date">${location.day}. joulukuuta 2025</div>
         <div class="description">${location.description}</div>
       </div>
     `).join('');
