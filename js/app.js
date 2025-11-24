@@ -202,6 +202,18 @@
   // Initialize map
   let map;
   let markers = [];
+  let activeMarker = null;
+  
+  // Create custom Christmas tree icon
+  const christmasTreeIcon = L.divIcon({
+    html: '<div style="font-size: 32px;">🎄</div>',
+    className: 'christmas-tree-marker',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32]
+  });
+  
+  const defaultIcon = new L.Icon.Default();
+  
   function initMap() {
     // Create map centered on Littoinen, Finland with autoPan options
     map = L.map('map', {
@@ -227,28 +239,55 @@
     // Add new markers
     locations.forEach(location => {
       const marker = L.marker([location.lat, location.lng])
-        .addTo(map)
-        .bindPopup(createPopupContent(location), {
-          autoPan: true,
-          autoPanPaddingTopLeft: [10, 280],
-          autoPanPaddingBottomRight: [10, 40],
-          keepInView: true,
-          maxWidth: 300
-        });
+        .addTo(map);
+      
+      // Store location data with marker
+      marker.locationDay = location.day;
+      
+      // Add click handler to marker
+      marker.on('click', () => {
+        setActiveLocation(location.day);
+      });
 
       markers.push(marker);
     });
   }
-
-  function createPopupContent(location) {
-    return `
-      <div class="popup-content">
-        ${location.image ? `<img src="${location.image}" alt="${location.name}">` : ''}
-        <h3>${location.name}</h3>
-        <div class="date">${location.day}. joulukuuta 2025</div>
-        <div class="description">${location.description}</div>
-      </div>
-    `;
+  
+  function setActiveLocation(day) {
+    const location = locations.find(loc => loc.day === day);
+    if (!location) return;
+    
+    // Reset previous active marker to default icon
+    if (activeMarker) {
+      activeMarker.setIcon(defaultIcon);
+    }
+    
+    // Find and set new active marker
+    markers.forEach(marker => {
+      if (marker.locationDay === day) {
+        marker.setIcon(christmasTreeIcon);
+        activeMarker = marker;
+      }
+    });
+    
+    // Zoom to location
+    map.setView([location.lat, location.lng], 16);
+    
+    // Scroll to top of page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Move card to top
+    moveCardToTop(day);
+  }
+  
+  function moveCardToTop(day) {
+    const listContainer = document.getElementById('locationsList');
+    const cards = Array.from(listContainer.children);
+    const clickedCard = cards.find(card => parseInt(card.dataset.day) === day);
+    
+    if (clickedCard) {
+      listContainer.insertBefore(clickedCard, listContainer.firstChild);
+    }
   }
 
   function renderLocationsList() {
@@ -271,25 +310,7 @@
     document.querySelectorAll('.location-card').forEach(card => {
       card.addEventListener('click', (e) => {
         const day = parseInt(card.dataset.day);
-        const location = locations.find(loc => loc.day === day);
-        if (location) {
-          // Scroll to map section first
-          document.querySelector('.map-section').scrollIntoView({ behavior: 'smooth' });
-          
-          // Set view with higher zoom and let Leaflet handle the popup positioning
-          map.setView([location.lat, location.lng], 16);
-          
-          // Delay to ensure map has rendered and scrolled
-          setTimeout(() => {
-            // Find and open the popup for this location
-            markers.forEach(marker => {
-              const markerLatLng = marker.getLatLng();
-              if (markerLatLng.lat === location.lat && markerLatLng.lng === location.lng) {
-                marker.openPopup();
-              }
-            });
-          }, 300);
-        }
+        setActiveLocation(day);
       });
     });
   }
@@ -306,22 +327,9 @@
     
     // Only auto-zoom if we're in December and the day is between 1-24
     if (currentMonth === 11 && currentDay >= 1 && currentDay <= 24) {
-      const currentLocation = locations.find(loc => loc.day === currentDay);
-      if (currentLocation) {
-        setTimeout(() => {
-          map.setView([currentLocation.lat, currentLocation.lng], 16);
-          
-          // Open the popup for today's location
-          setTimeout(() => {
-            markers.forEach(marker => {
-              const markerLatLng = marker.getLatLng();
-              if (markerLatLng.lat === currentLocation.lat && markerLatLng.lng === currentLocation.lng) {
-                marker.openPopup();
-              }
-            });
-          }, 300);
-        }, 500);
-      }
+      setTimeout(() => {
+        setActiveLocation(currentDay);
+      }, 500);
     }
   });
 
