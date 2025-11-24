@@ -299,10 +299,12 @@
     highlightedCard.dataset.day = location.day;
     highlightedCard.innerHTML = `
       ${location.image ? `<img src="${location.image}" alt="${location.name}" class="card-image">` : ''}
-      <div class="day-badge">${location.day}</div>
-      <h3>${location.name}</h3>
-      <div class="date">${location.day}. joulukuuta 2025</div>
-      <div class="description">${location.description}</div>
+      <div class="card-content">
+        <div class="day-badge">${location.day}</div>
+        <h3>${location.name}</h3>
+        <div class="date">${location.day}. joulukuuta 2025</div>
+        <div class="description">${location.description}</div>
+      </div>
     `;
     
     // Add click handler to the highlighted card
