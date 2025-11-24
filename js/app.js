@@ -230,8 +230,8 @@
         .addTo(map)
         .bindPopup(createPopupContent(location), {
           autoPan: true,
-          autoPanPaddingTopLeft: [20, 100],
-          autoPanPaddingBottomRight: [20, 20],
+          autoPanPaddingTopLeft: [10, 280],
+          autoPanPaddingBottomRight: [10, 40],
           keepInView: true,
           maxWidth: 300
         });
@@ -243,10 +243,10 @@
   function createPopupContent(location) {
     return `
       <div class="popup-content">
+        ${location.image ? `<img src="${location.image}" alt="${location.name}">` : ''}
         <h3>${location.name}</h3>
         <div class="date">${location.day}. joulukuuta 2025</div>
         <div class="description">${location.description}</div>
-        ${location.image ? `<img src="${location.image}" alt="${location.name}">` : ''}
       </div>
     `;
   }
@@ -259,6 +259,7 @@
 
     listContainer.innerHTML = sortedLocations.map(location => `
       <div class="location-card" data-day="${location.day}">
+        ${location.image ? `<img src="${location.image}" alt="${location.name}" class="card-image">` : ''}
         <div class="day-badge">${location.day}</div>
         <h3>${location.name}</h3>
         <div class="date">${location.day}. joulukuuta 2025</div>
