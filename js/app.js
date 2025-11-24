@@ -297,6 +297,31 @@
   document.addEventListener('DOMContentLoaded', () => {
     initMap();
     renderLocationsList();
+    
+    // Auto-zoom to current date location
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth(); // 0-indexed, so December is 11
+    
+    // Only auto-zoom if we're in December and the day is between 1-24
+    if (currentMonth === 11 && currentDay >= 1 && currentDay <= 24) {
+      const currentLocation = locations.find(loc => loc.day === currentDay);
+      if (currentLocation) {
+        setTimeout(() => {
+          map.setView([currentLocation.lat, currentLocation.lng], 16);
+          
+          // Open the popup for today's location
+          setTimeout(() => {
+            markers.forEach(marker => {
+              const markerLatLng = marker.getLatLng();
+              if (markerLatLng.lat === currentLocation.lat && markerLatLng.lng === currentLocation.lng) {
+                marker.openPopup();
+              }
+            });
+          }, 300);
+        }, 500);
+      }
+    }
   });
 
 })();
