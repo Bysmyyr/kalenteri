@@ -273,8 +273,11 @@
     // Zoom to location
     map.setView([location.lat, location.lng], 16);
     
-    // Scroll to top of page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to map section (make map top align with screen top)
+    const mapSection = document.querySelector('.map-section');
+    if (mapSection) {
+      mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     
     // Move card to top
     moveCardToTop(day);
