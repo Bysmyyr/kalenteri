@@ -178,13 +178,12 @@ main {
   display: block;
 }
 
-.location-card h3,
 .location-card .date,
 .location-card .description {
   padding: 0 1.5rem;
 }
 
-.location-card h3 {
+.location-card .date {
   padding-top: 1rem;
 }
 

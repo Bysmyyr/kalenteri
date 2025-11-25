@@ -7,14 +7,16 @@
 
   // Locations configuration (edit these to customize your advent calendar)
   // All locations in Littoinen, Finland area
+  // Optional preview field (shown before the date arrives):
+  //   - previewDescription: Show this description before the date arrives
   let locations = [
     //{
-    //  day: 1,
-    //  name: "Esimerkkikohde",
-    //  description: "Lisää kuvaus tähän.",
-    //  image: "", // Jätä tyhjäksi käyttääksesi oletuskuvaa
-    //  lat: 60.4862,
-    //  lng: 22.3812
+    //  day: 24,
+    //  description: "Viimeinen luukku! Tule viettämään jouluaattoa kanssamme.",
+    //  image: "",
+    //  previewDescription: "Jotain erityistä odottaa! Avautuu 24. joulukuuta.",
+    //  lat: 60.4502,
+    //  lng: 22.4112
     //}
   ];
 
@@ -51,6 +53,19 @@
     updateMapMarkers();
   }
 
+  // Helper function to check if a location should show preview content
+  function shouldShowPreview(location) {
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth();
+
+    // Before December or in December before the day: show preview if preview description exists
+    if (currentMonth < 11 || (currentMonth === 11 && currentDay < location.day)) {
+      return location.previewDescription;
+    }
+    return false;
+  }
+
   function updateMapMarkers() {
     // Clear existing markers
     markers.forEach(marker => map.removeLayer(marker));
@@ -61,18 +76,15 @@
     const currentDay = today.getDate();
     const currentMonth = today.getMonth(); // 0-indexed, so December is 11, November is 10
 
-    // Don't show anything in November
-    if (currentMonth === 10) return;
-
-    // Determine which days to show
-    // December: show up to current day
-    // Other months: show all 24 days
-    const maxDay = (currentMonth === 11) ? currentDay : 24;
-
-    // Add new markers only for available days
+    // Add new markers for locations
     locations.forEach(location => {
-      // Skip future days
-      if (location.day > maxDay) return;
+      // Show if:
+      // - In December and day has arrived, OR
+      // - Has preview content (shown in any month before the day)
+      const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
+      const hasPreview = shouldShowPreview(location);
+
+      if (!dayHasArrived && !hasPreview) return;
 
       const marker = L.marker([location.lat, location.lng])
         .addTo(map);
@@ -137,18 +149,23 @@
     const location = locations.find(loc => loc.day === day);
     if (!location) return;
 
+    // Determine if we should show preview content
+    const showPreview = shouldShowPreview(location);
+
+    // Select content to display
+    const displayDescription = showPreview && location.previewDescription ? location.previewDescription : location.description;
+    const imageUrl = location.image || DEFAULT_IMAGE;
+
     // Create a copy of the card
     const highlightedCard = document.createElement('div');
     highlightedCard.className = 'location-card highlighted-card';
     highlightedCard.dataset.day = location.day;
-    const imageUrl = location.image || DEFAULT_IMAGE;
     highlightedCard.innerHTML = `
-      <img src="${imageUrl}" alt="${location.name}" class="card-image">
+      <img src="${imageUrl}" alt="Luukku ${location.day}" class="card-image">
       <div class="card-content">
         <div class="day-badge">${location.day}</div>
-        <h3>${location.name}</h3>
         <div class="date">${location.day}. joulukuuta 2025</div>
-        <div class="description">${location.description}</div>
+        <div class="description">${displayDescription}</div>
       </div>
     `;
 
@@ -169,31 +186,38 @@
     const currentDay = today.getDate();
     const currentMonth = today.getMonth(); // 0-indexed, so December is 11, November is 10
 
-    // Don't show anything in November
-    if (currentMonth === 10) {
+    // Filter locations to show
+    const sortedLocations = [...locations]
+      .filter(loc => {
+        // Show if:
+        // - In December and day has arrived, OR
+        // - Has preview content (shown in any month before the day)
+        const dayHasArrived = currentMonth === 11 && loc.day <= currentDay;
+        const hasPreview = shouldShowPreview(loc);
+        return dayHasArrived || hasPreview;
+      })
+      .sort((a, b) => a.day - b.day);
+
+    // If no locations to show, display message
+    if (sortedLocations.length === 0) {
       listContainer.innerHTML = '<p style="text-align: center; color: #718096; padding: 2rem;">Joulukalenteri avautuu joulukuussa! 🎄</p>';
       return;
     }
 
-    // Determine which days to show
-    // December: show up to current day
-    // Other months: show all 24 days
-    const maxDay = (currentMonth === 11) ? currentDay : 24;
-
-    // Sort locations by day and filter to show only available days
-    const sortedLocations = [...locations]
-      .filter(loc => loc.day <= maxDay)
-      .sort((a, b) => a.day - b.day);
-
     listContainer.innerHTML = sortedLocations.map(location => {
+      // Determine if we should show preview content
+      const showPreview = shouldShowPreview(location);
+
+      // Select content to display
+      const displayDescription = showPreview && location.previewDescription ? location.previewDescription : location.description;
       const imageUrl = location.image || DEFAULT_IMAGE;
+
       return `
         <div class="location-card" data-day="${location.day}">
-          <img src="${imageUrl}" alt="${location.name}" class="card-image">
+          <img src="${imageUrl}" alt="Luukku ${location.day}" class="card-image">
           <div class="day-badge">${location.day}</div>
-          <h3>${location.name}</h3>
           <div class="date">${location.day}. joulukuuta 2025</div>
-          <div class="description">${location.description}</div>
+          <div class="description">${displayDescription}</div>
         </div>
       `;
     }).join('');
