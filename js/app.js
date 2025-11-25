@@ -253,7 +253,7 @@
     });
   }
   
-  function setActiveLocation(day) {
+  function setActiveLocation(day, updateUrl = true) {
     const location = locations.find(loc => loc.day === day);
     if (!location) return;
     
@@ -277,6 +277,11 @@
     const mapSection = document.querySelector('.map-section');
     if (mapSection) {
       mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    // Update URL hash
+    if (updateUrl) {
+      window.history.pushState(null, '', `#day-${day}`);
     }
     
     // Move card to top
@@ -344,22 +349,47 @@
     });
   }
 
+  // Check URL hash and activate location
+  function checkUrlHash() {
+    const hash = window.location.hash;
+    if (hash.startsWith('#day-')) {
+      const day = parseInt(hash.replace('#day-', ''));
+      if (day >= 1 && day <= 24) {
+        setTimeout(() => {
+          setActiveLocation(day, false); // Don't update URL since we're loading from it
+        }, 500);
+        return true;
+      }
+    }
+    return false;
+  }
+
   // Event Listeners
   document.addEventListener('DOMContentLoaded', () => {
     initMap();
     renderLocationsList();
     
-    // Auto-zoom to current date location
-    const today = new Date();
-    const currentDay = today.getDate();
-    const currentMonth = today.getMonth(); // 0-indexed, so December is 11
+    // Check if URL has a hash to load specific day
+    const hasHash = checkUrlHash();
     
-    // Only auto-zoom if we're in December and the day is between 1-24
-    if (currentMonth === 11 && currentDay >= 1 && currentDay <= 24) {
-      setTimeout(() => {
-        setActiveLocation(currentDay);
-      }, 500);
+    // Auto-zoom to current date location only if no hash in URL
+    if (!hasHash) {
+      const today = new Date();
+      const currentDay = today.getDate();
+      const currentMonth = today.getMonth(); // 0-indexed, so December is 11
+      
+      // Only auto-zoom if we're in December and the day is between 1-24
+      if (currentMonth === 11 && currentDay >= 1 && currentDay <= 24) {
+        setTimeout(() => {
+          setActiveLocation(currentDay);
+        }, 500);
+      }
     }
+  });
+  
+  // Handle hash changes (back/forward navigation)
+  window.addEventListener('hashchange', () => {
+    checkUrlHash();
   });
 
 })();
