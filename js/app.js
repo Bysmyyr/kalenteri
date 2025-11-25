@@ -7,14 +7,16 @@
 
   // Locations configuration (edit these to customize your advent calendar)
   // All locations in Littoinen, Finland area
-  // Optional preview field (shown before the date arrives):
+  // Optional preview fields (shown before the date arrives):
   //   - previewDescription: Show this description before the date arrives
+  //   - previewImage: Show this image before the date arrives (optional, uses same image if not set)
   let locations = [
     //{
     //  day: 24,
     //  description: "Viimeinen luukku! Tule viettämään jouluaattoa kanssamme.",
     //  image: "",
     //  previewDescription: "Jotain erityistä odottaa! Avautuu 24. joulukuuta.",
+    //  previewImage: "", // Optional: different image for preview
     //  lat: 60.4502,
     //  lng: 22.4112
     //}
@@ -154,7 +156,15 @@
 
     // Select content to display
     const displayDescription = showPreview && location.previewDescription ? location.previewDescription : location.description;
-    const imageUrl = location.image || DEFAULT_IMAGE;
+    // Use previewImage if showing preview and it's set, otherwise use regular image
+    let imageUrl;
+    if (showPreview && location.previewImage) {
+      imageUrl = location.previewImage;
+    } else {
+      imageUrl = location.image || DEFAULT_IMAGE;
+    }
+    // Apply default if still empty
+    if (!imageUrl) imageUrl = DEFAULT_IMAGE;
 
     // Create a copy of the card
     const highlightedCard = document.createElement('div');
@@ -210,7 +220,15 @@
 
       // Select content to display
       const displayDescription = showPreview && location.previewDescription ? location.previewDescription : location.description;
-      const imageUrl = location.image || DEFAULT_IMAGE;
+      // Use previewImage if showing preview and it's set, otherwise use regular image
+      let imageUrl;
+      if (showPreview && location.previewImage) {
+        imageUrl = location.previewImage;
+      } else {
+        imageUrl = location.image || DEFAULT_IMAGE;
+      }
+      // Apply default if still empty
+      if (!imageUrl) imageUrl = DEFAULT_IMAGE;
 
       return `
         <div class="location-card" data-day="${location.day}">
