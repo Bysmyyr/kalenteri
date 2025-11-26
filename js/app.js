@@ -170,7 +170,7 @@
     return false;
   }
 
-  function updateMapMarkers() {
+  function updateMapMarkers(selectedDay = null) {
     // Clear existing markers
     markers.forEach(marker => map.removeLayer(marker));
     markers = [];
@@ -184,11 +184,13 @@
     locations.forEach(location => {
       // Show if:
       // - In December and day has arrived, OR
-      // - Has preview content (shown in any month before the day)
+      // - Has preview content (shown in any month before the day), OR
+      // - This is the selected day (always show selected marker)
       const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
       const hasPreview = shouldShowPreview(location);
+      const isSelected = selectedDay !== null && location.day === selectedDay;
 
-      if (!dayHasArrived && !hasPreview) return;
+      if (!dayHasArrived && !hasPreview && !isSelected) return;
 
       const marker = L.marker([location.lat, location.lng])
         .addTo(map);
@@ -213,6 +215,9 @@
     if (activeMarker) {
       activeMarker.setIcon(defaultIcon);
     }
+
+    // Update markers to ensure the selected day is visible
+    updateMapMarkers(day);
 
     // Find and set new active marker
     markers.forEach(marker => {
