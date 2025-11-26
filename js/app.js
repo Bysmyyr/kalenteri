@@ -40,8 +40,8 @@
     },
     {
       day: 6,
-      description: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin kello 10 vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
-      previewDescription: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin kello 10 vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
+      description: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin <b> kello 10 </b>  vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
+      previewDescription: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin <b>  kello 10 </b> vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
       image: "",
       lat: 60.45072532835268,
       lng: 22.40304151505156
@@ -49,7 +49,7 @@
     {
       day: 7,
       description: "<b> Klo 16:00 </b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
-      previewDescription: "<b> Klo 16:00 <b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
+      previewDescription: "<b> Klo 16:00 </b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
       image: "",
       lat: 60.45002889356319,
       lng: 22.403744736835353
@@ -63,7 +63,6 @@
     {
       day: 10,
       description: "Perinteinen Nallejoulu rakentuu Verkatehtaan leikkimökkiin. Tule kurkkaamaan, miltä joulumökissä näyttää.",
-      previewDescription: "Nallet toivottavat vieraat tervetulleiksi Verkatehtaan joulumökkiin!",
       image: "",
       lat: 60.44994278125212,
       lng:  22.403868873699338,
@@ -258,7 +257,7 @@
     const showPreview = shouldShowPreview(location);
 
     // Select content to display
-    const displayDescription = showPreview && location.previewDescription ? location.previewDescription : location.description;
+    const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
     // Use previewImage if showing preview and it's set, otherwise use regular image
     let imageUrl;
     if (showPreview && location.previewImage) {
@@ -322,7 +321,7 @@
       const showPreview = shouldShowPreview(location);
 
       // Select content to display
-      const displayDescription = showPreview && location.previewDescription ? location.previewDescription : location.description;
+      const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
       // Use previewImage if showing preview and it's set, otherwise use regular image
       let imageUrl;
       if (showPreview && location.previewImage) {
