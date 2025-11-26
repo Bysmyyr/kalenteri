@@ -11,15 +11,118 @@
   //   - previewDescription: Show this description before the date arrives
   //   - previewImage: Show this image before the date arrives (optional, uses same image if not set)
   let locations = [
-    //{
-    //  day: 24,
-    //  description: "Viimeinen luukku! Tule viettämään jouluaattoa kanssamme.",
-    //  image: "",
-    //  previewDescription: "Jotain erityistä odottaa! Avautuu 24. joulukuuta.",
-    //  previewImage: "", // Optional: different image for preview
-    //  lat: 60.4502,
-    //  lng: 22.4112
-    //}
+    {
+      day: 1,
+      image: "",
+      description: "",
+      lat: 60.45084722008606,
+      lng: 22.402141327176924
+    },
+    {
+      day: 2,
+      description: "Tule kokemaan Mutteritalon satumainen karkkipolku. Saatat nähdä joulupukin kapuamassa katolle ! 🎅🏻",
+      image: "",
+      lat: 60.449654628377544,
+      lng: 22.40318196186968
+    },
+    {
+      day: 3,
+      description: "",
+      image: "",
+      lat: 60.451589714206584,
+      lng: 22.410283558169358
+    },
+    {
+      day: 4,
+      image: "",
+      lat: 60.453498039148194,
+      lng: 22.418302986404758
+    },
+    {
+      day: 6,
+      description: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin kello 10 vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
+      previewDescription: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin kello 10 vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
+      image: "",
+      lat: 60.45072532835268,
+      lng: 22.40304151505156
+    },
+    {
+      day: 7,
+      description: "<b> Klo 16:00 </b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
+      previewDescription: "<b> Klo 16:00 <b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
+      image: "",
+      lat: 60.45002889356319,
+      lng: 22.403744736835353
+    },
+    {
+      day: 9,
+      image: "",
+      lat: 60.45096889457735,
+      lng: 22.414889539502898
+    },
+    {
+      day: 10,
+      description: "Perinteinen Nallejoulu rakentuu Verkatehtaan leikkimökkiin. Tule kurkkaamaan, miltä joulumökissä näyttää.",
+      previewDescription: "Nallet toivottavat vieraat tervetulleiksi Verkatehtaan joulumökkiin!",
+      image: "",
+      lat: 60.44994278125212,
+      lng:  22.403868873699338,
+    },
+    {
+      day: 11,
+      image: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen klo 18:00",
+      lat: 60.45134060615078,
+      lng: 22.403596153407985
+    },
+    {
+      day: 12,
+      image: "",
+      lat: 60.454612186610234,
+      lng: 22.411872577014808
+    },
+    {
+      day: 13,
+      image: "",
+
+    },
+    {
+      day: 14,
+      image: "",
+      lat: 60.45083593671429,
+      lng: 22.408242906747066
+    },
+    {
+      day: 17,
+      description: "Joulumaa on muutakin kuin tunturi ja lunta.",
+      image: "",
+      lat: 60.45462009619115,
+      lng: 22.41695969378407
+    },
+    {
+      day: 18,
+      image: "",
+      lat: 60.446882482634436,
+      lng: 22.409809986107653
+    },
+    {
+      day: 19,
+      description: "Viime vuonna ikkunaan\nJäi pukki kiinni nutustaan\n\nTänä vuonna tuumi hän\n\"Jos katon kautta yritän\".\nMut huono tuuri oli taas\nJäi parta kiinni saumaan nääs.",
+      image: "",
+      lat: 60.45093741391784,
+      lng: 22.404264698928536
+    },
+    {
+      day: 23,
+      image: "",
+      lat: 60.447430511152305,
+      lng: 22.40694698637342
+    },
+    {
+      day: 24,
+      image: "",
+      lat: 60.45134060615078,
+      lng: 22.403596153407985
+    }
   ];
 
   // Initialize map
