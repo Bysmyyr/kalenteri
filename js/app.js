@@ -261,11 +261,11 @@
     // Zoom to location
     map.setView([location.lat, location.lng], 19);
 
-    // Scroll to map section (center it in viewport) after a brief delay to let map pan
+    // Scroll to map section (position at top of viewport) after a brief delay to let map pan
     setTimeout(() => {
       const mapSection = document.querySelector('.map-section');
       if (mapSection) {
-        mapSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
 
