@@ -230,11 +230,13 @@
     // Zoom to location
     map.setView([location.lat, location.lng], 19);
 
-    // Scroll to map section (make map top align with screen top)
-    const mapSection = document.querySelector('.map-section');
-    if (mapSection) {
-      mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Scroll to map section (center it in viewport) after a brief delay to let map pan
+    setTimeout(() => {
+      const mapSection = document.querySelector('.map-section');
+      if (mapSection) {
+        mapSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
 
     // Update URL hash
     if (updateUrl) {
