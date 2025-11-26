@@ -223,7 +223,7 @@
     });
 
     // Zoom to location
-    map.setView([location.lat, location.lng], 16);
+    map.setView([location.lat, location.lng], 19);
 
     // Scroll to map section (make map top align with screen top)
     const mapSection = document.querySelector('.map-section');
