@@ -170,6 +170,31 @@
     return false;
   }
 
+  // Check if dev mode is enabled via URL parameter
+  function isDevMode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('dev_mode') === 'on';
+  }
+
+  // Check if a day is publicly accessible
+  function isDayAccessible(day) {
+    const location = locations.find(loc => loc.day === day);
+    if (!location) return false;
+
+    // In dev mode, all days are accessible
+    if (isDevMode()) return true;
+
+    // Check if day is publicly available
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth();
+
+    const dayHasArrived = currentMonth === 11 && day <= currentDay;
+    const hasPreview = shouldShowPreview(location);
+
+    return dayHasArrived || hasPreview;
+  }
+
   function updateMapMarkers(selectedDay = null) {
     // Clear existing markers
     markers.forEach(marker => map.removeLayer(marker));
@@ -185,10 +210,10 @@
       // Show if:
       // - In December and day has arrived, OR
       // - Has preview content (shown in any month before the day), OR
-      // - This is the selected day (always show selected marker)
+      // - This is the selected day (always show selected marker in dev mode)
       const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
       const hasPreview = shouldShowPreview(location);
-      const isSelected = selectedDay !== null && location.day === selectedDay;
+      const isSelected = selectedDay !== null && location.day === selectedDay && isDevMode();
 
       if (!dayHasArrived && !hasPreview && !isSelected) return;
 
@@ -210,6 +235,12 @@
   function setActiveLocation(day, updateUrl = true) {
     const location = locations.find(loc => loc.day === day);
     if (!location) return;
+
+    // Check if day is accessible (unless in dev mode)
+    if (!isDayAccessible(day)) {
+      console.log(`Day ${day} is not yet accessible`);
+      return;
+    }
 
     // Reset previous active marker to default icon
     if (activeMarker) {
@@ -364,10 +395,17 @@
     if (hash.startsWith('#day-')) {
       const day = parseInt(hash.replace('#day-', ''));
       if (day >= 1 && day <= 24) {
-        setTimeout(() => {
-          setActiveLocation(day, false); // Don't update URL since we're loading from it
-        }, 500);
-        return true;
+        // Only allow access if day is publicly accessible or dev mode is on
+        if (isDayAccessible(day)) {
+          setTimeout(() => {
+            setActiveLocation(day, false); // Don't update URL since we're loading from it
+          }, 500);
+          return true;
+        } else {
+          // Clear invalid hash
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          return false;
+        }
       }
     }
     return false;
