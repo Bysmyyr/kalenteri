@@ -75,8 +75,8 @@
     },
     {
       day: 11,
-      description: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen klo 18:00",
-      previewDescription: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen klo 18:00",
+      description: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen <b>klo 18:00</b>",
+      previewDescription: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen <b>klo 18:00</b>",
       image: "",
       lat: 60.45134060615078,
       lng: 22.403596153407985
@@ -92,8 +92,8 @@
       image: "13.jpg",
       lat: 60.44855973606509,
       lng: 22.40439627504237,
-      description: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma klo 17-19!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!",
-      previewDescription: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma klo 17-19!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!"
+      description: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma <b>klo 17-19</b>!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!",
+      previewDescription: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma <b>klo 17-19</b>!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!"
     },
     {
       day: 14,
