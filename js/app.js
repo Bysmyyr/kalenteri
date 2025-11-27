@@ -55,6 +55,12 @@
       lng: 22.403744736835353
     },
     {
+      day: 8,
+      image: "",
+      lat: 60.45273011497546,
+      lng: 22.407787843436687
+    },
+    {
       day: 9,
       image: "",
       lat: 60.45096889457735,
@@ -109,6 +115,14 @@
       image: "",
       lat: 60.45093741391784,
       lng: 22.404264698928536
+    },
+    {
+      day: 20,
+      description: "Tule A-rapun eteen <b>klo 17.00</b>, silloin tapahtuu jotain yllättävää.",
+      previewDescription: "Tule A-rapun eteen <b>klo 17.00</b>, silloin tapahtuu jotain yllättävää.",
+      image: "",
+      lat: 60.44984102697147,
+      lng: 22.403879658559337
     },
     {
       day: 23,
