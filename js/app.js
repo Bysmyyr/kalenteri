@@ -131,6 +131,14 @@
       lng: 22.403879658559337
     },
     {
+      day: 21,
+      description: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18<b/>",
+      previewDescription: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18<b/>",
+      image: "",
+      lat: 60.44986944549243,
+      lng: 22.403707458845187,
+    },
+    {
       day: 23,
       image: "",
       lat: 60.447430511152305,
