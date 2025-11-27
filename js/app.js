@@ -132,8 +132,8 @@
     },
     {
       day: 21,
-      description: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18<b/>",
-      previewDescription: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18<b/>",
+      description: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18</b>",
+      previewDescription: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18</b>",
       image: "",
       lat: 60.44986944549243,
       lng: 22.403707458845187,
@@ -269,7 +269,7 @@
     locations.forEach(location => {
       const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
       const hasPreview = shouldShowPreview(location);
-      
+
       // In preview_all mode, show all locations
       if (isPreviewAllMode()) {
         // Show all locations in preview_all mode
