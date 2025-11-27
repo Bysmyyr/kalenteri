@@ -78,7 +78,7 @@
       day: 11,
       description: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen <b>klo 18:00</b>",
       previewDescription: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen <b>klo 18:00</b>",
-      image: "",
+      image: "11.jpg",
       lat: 60.45134060615078,
       lng: 22.403596153407985
     },
