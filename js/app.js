@@ -151,6 +151,14 @@
     iconAnchor: [16, 32]
   });
 
+  // Create yellow star icon for preview days
+  const previewIcon = L.divIcon({
+    html: '<div style="font-size: 28px;">⭐</div>',
+    className: 'preview-marker',
+    iconSize: [28, 28],
+    iconAnchor: [14, 28]
+  });
+
   const defaultIcon = new L.Icon.Default();
 
   function initMap() {
@@ -159,7 +167,7 @@
     map = L.map('map', {
       autoPanOnFocus: true,
       autoPan: true
-    }).setView([60.4502, 22.4112], 14);
+    }).setView([60.4502, 22.4112], 15);
 
     // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -231,11 +239,18 @@
 
       if (!dayHasArrived && !hasPreview && !isSelected) return;
 
-      const marker = L.marker([location.lat, location.lng])
+      // Choose icon based on whether day has arrived or is preview
+      let markerIcon = defaultIcon;
+      if (hasPreview && !dayHasArrived) {
+        markerIcon = previewIcon; // Yellow star for preview days
+      }
+
+      const marker = L.marker([location.lat, location.lng], { icon: markerIcon })
         .addTo(map);
 
       // Store location data with marker
       marker.locationDay = location.day;
+      marker.isPreview = hasPreview && !dayHasArrived;
 
       // Add click handler to marker
       marker.on('click', () => {
@@ -256,9 +271,13 @@
       return;
     }
 
-    // Reset previous active marker to default icon
+    // Reset previous active marker to appropriate icon (preview or default)
     if (activeMarker) {
-      activeMarker.setIcon(defaultIcon);
+      if (activeMarker.isPreview) {
+        activeMarker.setIcon(previewIcon);
+      } else {
+        activeMarker.setIcon(defaultIcon);
+      }
     }
 
     // Update markers to ensure the selected day is visible
@@ -273,7 +292,7 @@
     });
 
     // Zoom to location
-    map.setView([location.lat, location.lng], 19);
+    map.setView([location.lat, location.lng], 18);
 
     // Scroll to map section (position at top of viewport) after a brief delay to let map pan
     setTimeout(() => {
