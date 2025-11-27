@@ -75,7 +75,9 @@
     },
     {
       day: 11,
-      image: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen klo 18:00",
+      description: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen klo 18:00",
+      previewDescription: "Tule laulamaan kanssamme kauneimpia joululauluja alkaen klo 18:00",
+      image: "",
       lat: 60.45134060615078,
       lng: 22.403596153407985
     },
@@ -87,8 +89,11 @@
     },
     {
       day: 13,
-      image: "",
-
+      image: "13.jpg",
+      lat: 60.44855973606509,
+      lng: 22.40439627504237,
+      description: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma klo 17-19!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!",
+      previewDescription: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma klo 17-19!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!"
     },
     {
       day: 14,
@@ -190,6 +195,17 @@
       return location.previewDescription;
     }
     return false;
+  }
+
+  // Helper function to get full image path
+  function getImagePath(imageFilename) {
+    if (!imageFilename) return DEFAULT_IMAGE;
+    // If already has img/ prefix or is a full path, return as is
+    if (imageFilename.startsWith('img/') || imageFilename.startsWith('/')) {
+      return imageFilename;
+    }
+    // Otherwise, prepend img/
+    return `img/${imageFilename}`;
   }
 
   // Check if dev mode is enabled via URL parameter
@@ -332,12 +348,10 @@
     // Use previewImage if showing preview and it's set, otherwise use regular image
     let imageUrl;
     if (showPreview && location.previewImage) {
-      imageUrl = location.previewImage;
+      imageUrl = getImagePath(location.previewImage);
     } else {
-      imageUrl = location.image || DEFAULT_IMAGE;
+      imageUrl = getImagePath(location.image);
     }
-    // Apply default if still empty
-    if (!imageUrl) imageUrl = DEFAULT_IMAGE;
 
     // Create a copy of the card
     const highlightedCard = document.createElement('div');
@@ -396,12 +410,10 @@
       // Use previewImage if showing preview and it's set, otherwise use regular image
       let imageUrl;
       if (showPreview && location.previewImage) {
-        imageUrl = location.previewImage;
+        imageUrl = getImagePath(location.previewImage);
       } else {
-        imageUrl = location.image || DEFAULT_IMAGE;
+        imageUrl = getImagePath(location.image);
       }
-      // Apply default if still empty
-      if (!imageUrl) imageUrl = DEFAULT_IMAGE;
 
       return `
         <div class="location-card" data-day="${location.day}">
