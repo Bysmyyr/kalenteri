@@ -195,6 +195,9 @@
 
   // Helper function to check if a location should show preview content
   function shouldShowPreview(location) {
+    // In preview_all mode, never show preview (show full content)
+    if (isPreviewAllMode()) return false;
+
     const today = new Date();
     const currentDay = today.getDate();
     const currentMonth = today.getMonth();
@@ -223,10 +226,20 @@
     return urlParams.get('dev_mode') === 'on';
   }
 
+  // Check if preview_all mode is enabled via URL parameter
+  // This mode shows all locations as they would appear on December 24th
+  function isPreviewAllMode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('preview_all') === 'on';
+  }
+
   // Check if a day is publicly accessible
   function isDayAccessible(day) {
     const location = locations.find(loc => loc.day === day);
     if (!location) return false;
+
+    // In preview_all mode, all days are accessible
+    if (isPreviewAllMode()) return true;
 
     // In dev mode, all days are accessible
     if (isDevMode()) return true;
@@ -254,15 +267,20 @@
 
     // Add new markers for locations
     locations.forEach(location => {
-      // Show if:
-      // - In December and day has arrived, OR
-      // - Has preview content (shown in any month before the day), OR
-      // - This is the selected day (always show selected marker in dev mode)
-      const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
-      const hasPreview = shouldShowPreview(location);
-      const isSelected = selectedDay !== null && location.day === selectedDay && isDevMode();
+      // In preview_all mode, show all locations
+      if (isPreviewAllMode()) {
+        // Show all locations in preview_all mode
+      } else {
+        // Show if:
+        // - In December and day has arrived, OR
+        // - Has preview content (shown in any month before the day), OR
+        // - This is the selected day (always show selected marker in dev mode)
+        const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
+        const hasPreview = shouldShowPreview(location);
+        const isSelected = selectedDay !== null && location.day === selectedDay && isDevMode();
 
-      if (!dayHasArrived && !hasPreview && !isSelected) return;
+        if (!dayHasArrived && !hasPreview && !isSelected) return;
+      }
 
       // Choose icon based on whether day has arrived or is preview
       let markerIcon = defaultIcon;
@@ -395,6 +413,9 @@
     // Filter locations to show
     const sortedLocations = [...locations]
       .filter(loc => {
+        // In preview_all mode, show all locations
+        if (isPreviewAllMode()) return true;
+
         // Show if:
         // - In December and day has arrived, OR
         // - Has preview content (shown in any month before the day)
