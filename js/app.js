@@ -267,6 +267,9 @@
 
     // Add new markers for locations
     locations.forEach(location => {
+      const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
+      const hasPreview = shouldShowPreview(location);
+      
       // In preview_all mode, show all locations
       if (isPreviewAllMode()) {
         // Show all locations in preview_all mode
@@ -275,8 +278,6 @@
         // - In December and day has arrived, OR
         // - Has preview content (shown in any month before the day), OR
         // - This is the selected day (always show selected marker in dev mode)
-        const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
-        const hasPreview = shouldShowPreview(location);
         const isSelected = selectedDay !== null && location.day === selectedDay && isDevMode();
 
         if (!dayHasArrived && !hasPreview && !isSelected) return;
