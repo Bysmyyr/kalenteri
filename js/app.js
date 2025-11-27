@@ -27,8 +27,9 @@
     },
     {
       day: 3,
-      description: "",
-      image: "",
+      description: "Miksi joulupukki vaihtoi kännykkää? 🎅 Tule selvittämään se kotimme jouluaidasta ja anna joulumielen kasvaa, kun tekoälyn luomat vitsit piristävät päivääsi!\n" +
+        "Astu hetkeksi tonttujen maailmaan, naura pukin kommelluksille ja anna joulutaian tarttua mukaasi. Luvassa kevyttä huumoria ja hyvää mieltä kaikenikäisille! ⛄",
+      image: "3.png",
       lat: 60.451589714206584,
       lng: 22.410283558169358
     },
