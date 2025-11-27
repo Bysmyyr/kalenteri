@@ -94,7 +94,7 @@
       lat: 60.44855973606509,
       lng: 22.40439627504237,
       description: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma <b>klo 17-19</b>!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!",
-      previewDescription: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma <b>klo 17-19</b>!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!"
+      previewDescription: "Littoisten joulukatutapahtuma <b>klo 17-19</b>. Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin."
     },
     {
       day: 14,
@@ -346,10 +346,10 @@
 
     // Select content to display
     const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
-    // Use previewImage if showing preview and it's set, otherwise use regular image
+    // Use default image if showing preview, otherwise use regular image
     let imageUrl;
-    if (showPreview && location.previewImage) {
-      imageUrl = getImagePath(location.previewImage);
+    if (showPreview) {
+      imageUrl = DEFAULT_IMAGE;
     } else {
       imageUrl = getImagePath(location.image);
     }
@@ -408,10 +408,10 @@
 
       // Select content to display
       const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
-      // Use previewImage if showing preview and it's set, otherwise use regular image
+      // Use default image if showing preview, otherwise use regular image
       let imageUrl;
-      if (showPreview && location.previewImage) {
-        imageUrl = getImagePath(location.previewImage);
+      if (showPreview) {
+        imageUrl = DEFAULT_IMAGE;
       } else {
         imageUrl = getImagePath(location.image);
       }
