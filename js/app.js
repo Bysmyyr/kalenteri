@@ -135,7 +135,7 @@
       previewDescription: "Tule A-rapun eteen <b>klo 17.00</b>, silloin tapahtuu jotain yllättävää.",
       image: "",
       lat: 60.44984102697147,
-      lng: 22.403879658559337
+      lng: 22.403989658559337
     },
     {
       day: 21,
