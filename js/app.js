@@ -103,6 +103,13 @@
       lng: 22.408242906747066
     },
     {
+      day: 16,
+      description: "Montako kiireistä tonttua löydät? (Näkyvillä joulun yli)",
+      image: "",
+      lat: 60.449945894451176,
+      lng:  22.402620899424516
+    },
+    {
       day: 17,
       description: "Joulumaa on muutakin kuin tunturi ja lunta.",
       image: "",
@@ -137,6 +144,12 @@
       image: "",
       lat: 60.44986944549243,
       lng: 22.403707458845187,
+    },
+    {
+      day: 22,
+      image: "",
+      lat: 60.45846250668906,
+      lng: 22.419487232023357
     },
     {
       day: 23,
