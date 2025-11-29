@@ -103,6 +103,13 @@
       lng: 22.408242906747066
     },
     {
+      day: 15,
+      lat: 60.45206427815843,
+      lng: 22.41174481610432,
+      description: "Pihapelejä ja pipareita kaikenikäisille <b> klo 17:30-18:30</b>.",
+      previewDescription: "Pihapelejä ja pipareita kaikenikäisille <b> klo 17:30-18:30</b>."
+    },
+    {
       day: 16,
       description: "Montako kiireistä tonttua löydät? (Näkyvillä joulun yli)",
       image: "",
