@@ -21,7 +21,7 @@
     {
       day: 2,
       description: "Tule kokemaan Mutteritalon satumainen karkkipolku. Saatat nähdä joulupukin kapuamassa katolle ! 🎅🏻",
-      image: "",
+      image: "2.jpg",
       lat: 60.449654628377544,
       lng: 22.40318196186968
     },
