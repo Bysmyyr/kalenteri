@@ -13,8 +13,17 @@
   let locations = [
     {
       day: 1,
-      image: "",
-      description: "",
+      image: "1.jpg",
+      description: "Kiitävi aika, vierähtävät vuodet.\n" +
+        "\n" +
+        "\n" +
+        "Tänä vuonna Törölän tonttu pyöritti ovenpieleen somisteeksi vanhan kärrynpyörän. \n" +
+        "\n" +
+        "Se olkoot muistutuksena elämän kierrosta ja ajan kerroksellisuudesta. Taas on vuosi vierähtänyt tuoden elämään muutoksen värejä ja sävyjä. Aika vie meitä eteenpäin, mutta toistuvissa perinteissä on jotakin lohdullista ja tuttua – jotakin, joka asettaa maailman pyörityksen mittasuhteisiinsa.\n" +
+        "\n" +
+        "On tullut hetki pukea Littoisten kodit ja pihapiirit joulutunnelmaan. \n" +
+        "\n" +
+        "Nyt on aika lähteä jouluisille kävelyille naapurustoon joulukalenterin innoittamana – ja huokaista hetki.",
       lat: 60.45084722008606,
       lng: 22.402141327176924
     },
@@ -393,6 +402,8 @@
 
     // Select content to display
     const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
+    // Convert \n to <br> for HTML display
+    const displayDescriptionHtml = displayDescription.replace(/\n/g, '<br>');
     // Use default image if showing preview, otherwise use regular image
     let imageUrl;
     if (showPreview) {
@@ -410,7 +421,7 @@
       <div class="card-content">
         <div class="day-badge">${location.day}</div>
         <div class="date">${location.day}. joulukuuta 2025</div>
-        <div class="description">${displayDescription}</div>
+        <div class="description">${displayDescriptionHtml}</div>
       </div>
     `;
 
@@ -458,6 +469,8 @@
 
       // Select content to display
       const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
+      // Convert \n to <br> for HTML display
+      const displayDescriptionHtml = displayDescription.replace(/\n/g, '<br>');
       // Use default image if showing preview, otherwise use regular image
       let imageUrl;
       if (showPreview) {
@@ -471,7 +484,7 @@
           <img src="${imageUrl}" alt="Luukku ${location.day}" class="card-image">
           <div class="day-badge">${location.day}</div>
           <div class="date">${location.day}. joulukuuta 2025</div>
-          <div class="description">${displayDescription}</div>
+          <div class="description">${displayDescriptionHtml}</div>
         </div>
       `;
     }).join('');
