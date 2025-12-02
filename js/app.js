@@ -46,7 +46,7 @@
       day: 4,
       image: "",
       lat: 60.453498039148194,
-      lng: 22.418302986404758
+      lng: 22.418302986404758,
       description: "Hei pieni seikkailija/seikkailijat!\n" +
         "Tontut Nelly, Tilda ja Elmer kutsuvat sinut mukaan ihmeelliseen satuseikkailuun kotinsa portinpieleen, osoitteeseen Kalliorinne 4. He ovat valmistelleet salaisen tonttujen satuseikkailun. Sen läpi pääsee seuraamalla tarinaa ja tekemällä kuvitetun sadun tehtävät. Satuseikkailusta selvittyä saa korista napata pienen palkinnon mukaan kotimatkalle. "
     },
