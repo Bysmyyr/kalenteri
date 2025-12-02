@@ -493,7 +493,7 @@
 
     // Add click handlers for cards
     document.querySelectorAll('.location-card').forEach(card => {
-      card.addEventListener('click', (e) => {
+      card.addEventListener('click', () => {
         const day = parseInt(card.dataset.day);
         setActiveLocation(day);
       });
