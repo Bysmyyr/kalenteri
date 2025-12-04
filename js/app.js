@@ -54,6 +54,8 @@
       day: 5 ,
       lat:60.449441185325284,
       lng: 22.40464799615076,
+      image: "5.png",
+      description: "Kuka maalasi taivaan?",
     },
     {
       day: 6,
