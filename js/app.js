@@ -79,7 +79,8 @@
     },
     {
       day: 9,
-      image: "",
+      description: "Nappulametsän kuusen takaa paljastuu lasten eläinystävien riemukkaita talvipuuhia.",
+      image: "9.jpeg",
       lat: 60.45102288975213,
       lng: 22.414926517333928 ,
     },
