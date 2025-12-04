@@ -44,7 +44,7 @@
     },
     {
       day: 4,
-      image: "",
+      image: "4.png",
       lat: 60.453498039148194,
       lng: 22.418302986404758,
       description: "Hei pieni seikkailija/seikkailijat!\n" +
