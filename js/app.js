@@ -51,10 +51,15 @@
         "Tontut Nelly, Tilda ja Elmer kutsuvat sinut mukaan ihmeelliseen satuseikkailuun kotinsa portinpieleen, osoitteeseen Kalliorinne 4. He ovat valmistelleet salaisen tonttujen satuseikkailun. Sen läpi pääsee seuraamalla tarinaa ja tekemällä kuvitetun sadun tehtävät. Satuseikkailusta selvittyä saa korista napata pienen palkinnon mukaan kotimatkalle. "
     },
     {
+      day: 5 ,
+      lat:60.44966644337977,
+      lng: 22.404880940562187,
+    },
+    {
       day: 6,
-      description: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin <b> kello 10 </b>  vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
+      description: "Tervetuloa 6.12 kello 10 Ison Punasen vanhan pöytäryhmän luokse Itsenäisyyspäivän laulu-ja soittohetkeen 🎺\n\n Nallet Rauha ja Ylermi-Toivo istuvat penkillä rinnakkain ja lähettävät joulurauhaa kaikille. \n Usko, Toivo, Rakkaus - näissä Joulun ihme, salaisuus",
       previewDescription: "Ison Punasen väki toivottaa Hyvää Itsenäisyyspäivää soiton ja laulun voimin <b>  kello 10 </b> vanhan pöytäryhmän luona. Lämpimästi tervetuloa.",
-      image: "",
+      image: "6.jpg",
       lat: 60.45072532835268,
       lng: 22.40304151505156
     },
