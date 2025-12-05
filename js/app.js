@@ -51,9 +51,9 @@
         "Tontut Nelly, Tilda ja Elmer kutsuvat sinut mukaan ihmeelliseen satuseikkailuun kotinsa portinpieleen, osoitteeseen Kalliorinne 4. He ovat valmistelleet salaisen tonttujen satuseikkailun. Sen läpi pääsee seuraamalla tarinaa ja tekemällä kuvitetun sadun tehtävät. Satuseikkailusta selvittyä saa korista napata pienen palkinnon mukaan kotimatkalle. "
     },
     {
-      day: 5 ,
-      lat:60.449441185325284,
-      lng: 22.40464799615076,
+      day: 5,
+      lat: 60.44967679157192,
+      lng: 22.404780752476576,
       image: "5.png",
       description: "Kuka maalasi taivaan?",
     },
