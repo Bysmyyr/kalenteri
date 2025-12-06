@@ -67,8 +67,8 @@
     },
     {
       day: 7,
-      description: "Kutsu joulun tunnelmaan 🎄\nTervetuloa viettämään jouluista glögi- ja piparihetkeä Verkatehtaan sisäpihalle lasten leikkipaikan viereen klo 16! Luvassa on leppoisaa yhdessäoloa, pientä purtavaa ja joulun odotuksen tunnelmaa.\nKun olemme nauttineet glögistä ja pipareista, voimme yhdessä siirtyä lasten joulukirkkoon laulamaan.",
-      previewDescription: "<b> Klo 16:00 </b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
+      description: "Kutsu joulun tunnelmaan 🎄\nTervetuloa viettämään jouluista glögi- ja piparihetkeä Verkatehtaan sisäpihalle lasten leikkipaikan viereen <br>klo 16 - 17 </br>! Luvassa on leppoisaa yhdessäoloa, pientä purtavaa ja joulun odotuksen tunnelmaa.\nKun olemme nauttineet glögistä ja pipareista, voimme yhdessä siirtyä lasten joulukirkkoon laulamaan.",
+      previewDescription: "<b> Klo 16:00 - 17:00 </b> Iloista yhdessäoloa, glögiä ja pipareita. Lapset pääsevät leikkimään yhdessä. Sen jälkeen voidaan lähteä yhdessä lasten kanssa laulamaan joululauluja kirkkoon.",
       image: "7.png",
       lat: 60.45002889356319,
       lng: 22.403744736835353

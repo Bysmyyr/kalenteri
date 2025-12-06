@@ -3,7 +3,8 @@
     "allow": [
       "Bash(pre-commit run:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate day 7 with detailed description and image\n\n- Added comprehensive description for day 7 glögi event at Verkatehdas\n- Added 7.png image for day 7\n- Updated JS version to 2044348 for cache busting\n- Added project rules for JS version management\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate day 7 with detailed description and image\n\n- Added comprehensive description for day 7 glögi event at Verkatehdas\n- Added 7.png image for day 7\n- Updated JS version to 2044348 for cache busting\n- Added project rules for JS version management\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []
