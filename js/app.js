@@ -75,7 +75,8 @@
     },
     {
       day: 8,
-      image: "",
+      description: "Jollei jouluna ole lunta, voiko joulupukki tullakaan?\nYksi vaihtoehto on tietenkin polkupyörä. Pukin teknikkoapulainen Hiiri on luvannut laittaa Pukin pyörän ajokuntoon.\nVaikuttaa kuitenkin siltä, että pyörä saattaa vaatia muutakin kuin lisää ilmaa renkaisiin… ehtiiköhän Hiiri kunnostaa pyörän ajoissa?",
+      image: "8.jpg",
       lat: 60.45273011497546,
       lng: 22.407787843436687
     },
@@ -125,8 +126,9 @@
       day: 15,
       lat: 60.45206427815843,
       lng: 22.41174481610432,
-      description: "Pihapelejä ja pipareita kaikenikäisille <b> klo 17:30-18:30</b>.",
-      previewDescription: "Pihapelejä ja pipareita kaikenikäisille <b> klo 17:30-18:30</b>."
+      description: "Tervetuloa Littoisten koulun pihalle klo 17.30–18.30!\nTule viettämään mukava pieni hetki arki-illan keskellä. Tarjolla pihapelejä ja pipareita kaikenikäisille. Tavataan koulun kentällä.\n\nKäy samalla kurkkaamassa Instagramissa @piparkakkuprojekti.\nSieltä löytyy Nallelandian piparimaailma, pitkään jatkunut perinne eräässä osin littoislaistuneessa suvussa. Tämän vuoden piparkakkuteos rakentuu 19.–21.12. viikonloppuna. Luvassa on taas uudenlainen luomus ja kekseliäitä yksityiskohtia.\n\nLämpimästi tervetuloa mukaan joulukalenterin luukulle!",
+      previewDescription: "Pihapelejä ja pipareita kaikenikäisille <b> klo 17:30-18:30</b>.",
+      image: "15.jpg"
     },
     {
       day: 16,
