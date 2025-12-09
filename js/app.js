@@ -142,7 +142,7 @@
     {
       day: 17,
       description: "Joulumaa on muutakin kuin tunturi ja lunta.",
-      image: "",
+      image: "17.jpg",
       lat: 60.45462009619115,
       lng: 22.41695969378407
     },
