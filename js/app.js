@@ -37,7 +37,9 @@
     {
       day: 3,
       description: "Miksi joulupukki vaihtoi kännykkää? 🎅 Tule ottamaan siitä selvää ja anna joulumielen kasvaa, kun tekoälyn luomat vitsit piristävät päivääsi!\n" +
-        "Astu hetkeksi tonttujen maailmaan, naura pukin kommelluksille ja anna joulutaian tarttua mukaasi. Luvassa kevyttä huumoria ja hyvää mieltä kaikenikäisille! ⛄",
+        "Astu hetkeksi tonttujen maailmaan, naura pukin kommelluksille ja anna joulutaian tarttua mukaasi. Luvassa kevyttä huumoria ja hyvää mieltä kaikenikäisille! ⛄\n" +
+        "\n" +
+        "Luukku on auki jouluun asti. Se löytyy talomme päädyssä olevan istutuslaatikon puolivälistä, jouluvalojen kohdalta. Tule siis rohkeasti pihalle",
       image: "3.png",
       lat: 60.4515264396043,
       lng: 22.41012383216059,
@@ -89,8 +91,8 @@
     },
     {
       day: 10,
-      description: "Perinteinen Nallejoulu rakentuu Verkatehtaan leikkimökkiin. Tule kurkkaamaan, miltä joulumökissä näyttää.",
-      image: "",
+      description: "Joulukalenteriluukku numero 10 avautuu. Nallevaari sukulaisineen ja ystävineen on saapunut tänäkin vuonna viettämään perinteistä joulujuhlaansa Verkatehtaan leikkimökkiin. Tulehan sinäkin vierailulle!\n\n\nUudet Nallemökin rakentajat lähettävät rakkaita jouluterveisiä idean alkuperäiskehittäjälle Sarille 🧸🎄 ❤️",
+      image: "10.jpg",
       lat: 60.44994278125212,
       lng:  22.403868873699338,
     },
