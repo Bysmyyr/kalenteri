@@ -115,7 +115,7 @@
       image: "13.jpg",
       lat: 60.44855973606509,
       lng: 22.40439627504237,
-      description: "Hei mahtavat Litsalaiset 😍 Tänään on Littoisten joulukatutapahtuma <b>klo 17-19</b>!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. LIttoisten oma MLL tarjaa karkit, joita joulupukki jakaa lapsille tapahtumassa. Vietetään jouluinen hetki yhdessä!",
+      description: "Hei mahtavat Litsalaiset  Tänään on Littoisten joulukatutapahtuma <b>klo 17-19</b>!! Viime vuosien tapaan kaikki Litsalaiset (entiset, nykyiset ja tulevat) ovat erittäin tervetulleita nauttimaan yhteisestä hetkestä!! 🙂 Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin. Littoisten oma MLL tarjoaa karkkeja lapsille. Vietetään jouluinen hetki yhdessä!",
       previewDescription: "Littoisten joulukatutapahtuma <b>klo 17-19</b>. Tuo mukanasi oma lyhty, osta paikan päältä jouluisia herkkuja ja tutustu ihanan kylämme asukkaisiin."
     },
     {
@@ -141,7 +141,8 @@
     },
     {
       day: 17,
-      description: "Joulumaa on muutakin kuin tunturi ja lunta.",
+      description: "Tule katsomaan tonttujen touhua. Tähtituvan tontut Stara ja Tuikku pääsevät tänä vuonna pukin mukaan lahjoja jakamaan. He harjoittelevat pakettien lastaamista jo etukäteen, että se sitten aattona onnistuu ilman ongelmia. \n" +
+        "Ovat lastanneet Petriina poron selkäänkin jo paketteja. Mahtaako paketit pysyä Petriinan selässä kun hän johtaa porovaljakkoa, joka vetää pukin rekeä.",
       image: "17.jpg",
       lat: 60.45462009619115,
       lng: 22.41695969378407
