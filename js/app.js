@@ -120,9 +120,10 @@
     },
     {
       day: 14,
-      image: "",
+      image: "14.jpg",
       lat: 60.45083593671429,
-      lng: 22.408242906747066
+      lng: 22.408242906747066,
+      description: "Pitsinen lumisade\n\nHiljaa, kuin jouluyö, laskeutuu pitsinen lumisade. Vanhojen liinojen herkät kuviot kantavat mukanaan tarinoita kodeista, käsistä ja jouluista menneiltä vuosilta.\n\nValon ja varjon leikissä pitsit heräävät eloon leijuviksi lumihiutaleiksi, pois pöydiltä ja varastojen nurkista pölyttymästä. Pitsinen lumisade on kunnianosoitus käsityöperinteelle ja talven kauneudelle. Ja luo toiveen valkoisesta joulusta.\n\nLuukku 14 kutsuu pysähtymään, hengittämään hetken joulun hiljaisuutta ja aistimaan kiireettömyyden.\n\nJokainen liina on oma yksilönsä kuin lumihiutale, ainutlaatuinen ja hetken valoissa välkehtivä. Löydätkö kaksi samanlaista?"
     },
     {
       day: 15,
@@ -164,7 +165,7 @@
       day: 20,
       description: "Tule A-rapun eteen <b>klo 17.00</b>, silloin tapahtuu jotain yllättävää.",
       previewDescription: "Tule A-rapun eteen <b>klo 17.00</b>, silloin tapahtuu jotain yllättävää.",
-      image: "",
+      image: "20.jpg",
       lat: 60.44984102697147,
       lng: 22.403989658559337
     },
