@@ -135,8 +135,8 @@
     },
     {
       day: 16,
-      description: "Montako kiireistä tonttua löydät? (Näkyvillä joulun yli)",
-      image: "",
+      description: "Tontuilla on vuoden kiireisin aika menossa ja täysi touhu päällä -ainakin meidän tehtaan nurkilla pyörivillä.\nKuinka monta tonttua löydät 🧑🏻‍🎄",
+      image: "16.jpg",
       lat: 60.449945894451176,
       lng:  22.402620899424516
     },
