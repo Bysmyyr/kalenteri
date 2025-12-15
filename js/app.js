@@ -150,7 +150,8 @@
     },
     {
       day: 18,
-      image: "",
+      description: "Metsät, laaksot lumiset, kilisevät kulkuset ja tähtitaivas kirkas tuo taas joulumielen meille luo. ✨❄️\n\nLittoisten metsän asukkaat toivottavat rauhallista joulua!",
+      image: "18.jpg",
       lat: 60.446882482634436,
       lng: 22.409809986107653
     },
