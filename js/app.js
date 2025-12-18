@@ -158,7 +158,7 @@
     {
       day: 19,
       description: "Viime vuonna ikkunaan\nJäi pukki kiinni nutustaan\n\nTänä vuonna tuumi hän\n\"Jos katon kautta yritän\".\nMut huono tuuri oli taas\nJäi parta kiinni saumaan nääs.",
-      image: "",
+      image: "19.jpg",
       lat: 60.45093741391784,
       lng: 22.404264698928536
     },
@@ -172,9 +172,9 @@
     },
     {
       day: 21,
-      description: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18</b>",
-      previewDescription: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18</b>",
-      image: "",
+      description: "Tavataan illalla kello kuusi kuusen juurella 🎄. Toivotetaan porukalla Verkatehtaan portin uudelle kuuselle hyvää kasvua ja pitkää ikää! Seuraa tarjoilee niin moni naapuri ja kyläläinen, kuin paikalle pääsee. Lämmintä glögiä meille tarjoaa Verkarannan Huolto Oy.",
+      previewDescription: "Tavataan Verkatehtaan portin kuusen juurella <b>klo 18</b>. Tarjolla lämmintä glögiä!",
+      image: "21.jpg",
       lat: 60.44986944549243,
       lng: 22.403707458845187,
     },
