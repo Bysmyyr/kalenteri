@@ -186,7 +186,8 @@
     },
     {
       day: 23,
-      image: "",
+      description: "Nallella on jouluvalmistelut kesken, tule katsomaan osoitteeseen Puuvillakuja 3 B saako nalle koristeltua joulupuun ennen aattoa. 🧸",
+      image: "23.jpg",
       lat: 60.447430511152305,
       lng: 22.40694698637342
     },
