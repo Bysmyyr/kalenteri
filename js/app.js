@@ -180,7 +180,8 @@
     },
     {
       day: 22,
-      image: "",
+      description: "Jos ei jouluna ole lunta, voiko joulupukki tullakaan...? Toki tulee ja Solmijankujalla pääsee myös jo ennen aattoa yhteiskuvaan valkealle maalle (maanantaista keskiviikkoon). Tervetuloa!\nIloista joulua Litsa 🩷",
+      image: "22.jpg",
       lat: 60.45846250668906,
       lng: 22.419487232023357
     },
