@@ -194,7 +194,8 @@
     },
     {
       day: 24,
-      image: "",
+      image: "11.jpg",
+      description: "Hyvää ja rauhallista joulua. ❄️ Joulun lapsi on meille syntynyt! 🌟Olet lämpimästi tervetullut Littoisten Kyläkirkon jouluyön messuun klo 22. Messussa lauletaan yhdessä ja riemuitaan joulun toiveikkaasta sanomasta. \nMuita Kyläkirkon jouluaaton ja -päivän tapahtumia ovat: \n❤️Jouluaaton hartaus klo 15 \n❤️Joulupäivän aamuhartaus klo 8 \nHyvää, rauhallista ja siunattua joulua toivottaa Kyläkirkon poppoo. 🙏💒",
       lat: 60.45134060615078,
       lng: 22.403596153407985
     }
