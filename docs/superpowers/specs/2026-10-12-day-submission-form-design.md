@@ -48,8 +48,9 @@ static (GitHub Pages) and the form delivers its result by email via Web3Forms
 - Preview description (shown before the day arrives): textarea, optional, with a
   short explanation of what it is.
 - Photo: file input; resized client-side (about 800 px longest side, JPEG
-  quality about 0.7, target roughly 100 KB). Optional in edit mode (keeps
-  existing image if none chosen), required in new mode.
+  quality about 0.7, target roughly 100 KB). Optional in both modes. In edit
+  mode, no photo keeps the existing image. In new mode, no photo leaves `image`
+  out of the snippet (the site then shows the default image).
 - Location: Leaflet map; click or drag a marker. This is the only way to set
   `lat`/`lng`; there are no coordinate inputs. In edit mode the marker starts at
   the existing location. Send is disabled until a location is set.
@@ -87,8 +88,8 @@ Fields sent to Web3Forms:
 - `mode` (new/edit), `day` (typed text in new mode, number in edit mode),
   `key` (edit only), contact fields.
 - `snippet`: a complete JS object, valid JS, using JSON-escaped strings, with
-  `day`, `image`, `description`, `previewDescription` (only if set), `lat`,
-  `lng`. In edit mode it replaces the existing object. In new mode the first line
+  `day`, `image` (only if a photo was chosen, or kept from existing data in
+  edit mode), `description`, `previewDescription` (only if set), `lat`, `lng`. In edit mode it replaces the existing object. In new mode the first line
   is `day: 0, // requested: "<text>"`, with the text flattened to one line so it
   cannot break the code; the author edits the number before pasting.
 - `image`: base64 data URL of the resized photo (only if a photo was chosen).
