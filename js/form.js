@@ -6,7 +6,7 @@
   const { sanitizeDescription, buildSnippet } = window.FormLib;
 
   const ENDPOINT = 'https://api.web3forms.com/submit';
-  const ACCESS_KEY = '<<WEB3FORMS_ACCESS_KEY>>';
+  const ACCESS_KEY = '212871f3-7df2-4fd7-b65d-3358700e818c';
   const MAX_IMAGE_SIDE = 800;
   const MAX_IMAGE_CHARS = 200000;
 
