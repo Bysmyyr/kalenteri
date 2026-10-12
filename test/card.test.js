@@ -22,11 +22,11 @@ function legacyParts(location, showPreview) {
 }
 function legacyList(location, showPreview) {
   const { html, img } = legacyParts(location, showPreview);
-  return `<div class="location-card" data-day="${location.day}"><img src="${img}" alt="Luukku ${location.day}" class="card-image"><div class="day-badge">${location.day}</div><div class="date">${location.day}. joulukuuta 2025</div><div class="description">${html}</div></div>`;
+  return `<div class="location-card" data-day="${location.day}"><img src="${img}" alt="Luukku ${location.day}" class="card-image"><div class="day-badge">${location.day}</div><div class="date">${location.day}. joulukuuta 2026</div><div class="description">${html}</div></div>`;
 }
 function legacyHighlighted(location, showPreview) {
   const { html, img } = legacyParts(location, showPreview);
-  return `<div class="location-card highlighted-card" data-day="${location.day}"><img src="${img}" alt="Luukku ${location.day}" class="card-image"><div class="card-content"><div class="day-badge">${location.day}</div><div class="date">${location.day}. joulukuuta 2025</div><div class="description">${html}</div></div></div>`;
+  return `<div class="location-card highlighted-card" data-day="${location.day}"><img src="${img}" alt="Luukku ${location.day}" class="card-image"><div class="card-content"><div class="day-badge">${location.day}</div><div class="date">${location.day}. joulukuuta 2026</div><div class="description">${html}</div></div></div>`;
 }
 
 describe('renderCard matches the legacy markup for every location', () => {
@@ -61,7 +61,7 @@ describe('renderCard extras', () => {
   it('renders a non-numeric day with a year-only date line', () => {
     assert.equal(
       normalize(renderCard({ day: '?', description: 'Hei' })),
-      '<div class="location-card" data-day="?"><img src="img/default.png" alt="Luukku ?" class="card-image"><div class="day-badge">?</div><div class="date">joulukuuta 2025</div><div class="description">Hei</div></div>'
+      '<div class="location-card" data-day="?"><img src="img/default.png" alt="Luukku ?" class="card-image"><div class="day-badge">?</div><div class="date">joulukuuta 2026</div><div class="description">Hei</div></div>'
     );
   });
 

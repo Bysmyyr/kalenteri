@@ -11,7 +11,7 @@
 
   // Default image to use when no image is specified
   const DEFAULT_IMAGE = 'img/default.png';
-  const YEAR = 2025;
+  const YEAR = 2026;
 
   // Helper function to get full image path
   function getImagePath(imageFilename) {
