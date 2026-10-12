@@ -2,8 +2,7 @@
 (function() {
   'use strict';
 
-  // Default image to use when no image is specified
-  const DEFAULT_IMAGE = "img/default.png";
+  const { renderCard } = window.CalendarCard;
 
   // Locations come from js/locations.js
   let locations = window.LOCATIONS;
@@ -63,17 +62,6 @@
       return location.previewDescription;
     }
     return false;
-  }
-
-  // Helper function to get full image path
-  function getImagePath(imageFilename) {
-    if (!imageFilename) return DEFAULT_IMAGE;
-    // If already has img/ prefix or is a full path, return as is
-    if (imageFilename.startsWith('img/') || imageFilename.startsWith('/')) {
-      return imageFilename;
-    }
-    // Otherwise, prepend img/
-    return `img/${imageFilename}`;
   }
 
   // Check if dev mode is enabled via URL parameter
@@ -224,38 +212,19 @@
     const location = locations.find(loc => loc.day === day);
     if (!location) return;
 
-    // Determine if we should show preview content
-    const showPreview = shouldShowPreview(location);
-
-    // Select content to display
-    const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
-    // Convert \n to <br> for HTML display
-    const displayDescriptionHtml = displayDescription.replace(/\n/g, '<br>');
-    // Use default image if showing preview, otherwise use regular image
-    let imageUrl;
-    if (showPreview) {
-      imageUrl = DEFAULT_IMAGE;
-    } else {
-      imageUrl = getImagePath(location.image);
-    }
-
-    // Create a copy of the card
-    const highlightedCard = document.createElement('div');
-    highlightedCard.className = 'location-card highlighted-card';
-    highlightedCard.dataset.day = location.day;
-    highlightedCard.innerHTML = `
-      <img src="${imageUrl}" alt="Luukku ${location.day}" class="card-image">
-      <div class="card-content">
-        <div class="day-badge">${location.day}</div>
-        <div class="date">${location.day}. joulukuuta 2025</div>
-        <div class="description">${displayDescriptionHtml}</div>
-      </div>
-    `;
+    // Build the card from the shared renderer
+    const template = document.createElement('template');
+    template.innerHTML = renderCard(location, {
+      variant: 'highlighted',
+      showPreview: Boolean(shouldShowPreview(location))
+    }).trim();
+    const highlightedCard = template.content.firstElementChild;
 
     // Add click handler to the highlighted card
     highlightedCard.addEventListener('click', () => {
       setActiveLocation(location.day);
     });
+
 
     // Insert at the top
     listContainer.insertBefore(highlightedCard, listContainer.firstChild);
@@ -290,31 +259,12 @@
       return;
     }
 
-    listContainer.innerHTML = sortedLocations.map(location => {
-      // Determine if we should show preview content
-      const showPreview = shouldShowPreview(location);
-
-      // Select content to display
-      const displayDescription = showPreview && location.previewDescription ? location.previewDescription : (location.description || "Tule ja ylläty!");
-      // Convert \n to <br> for HTML display
-      const displayDescriptionHtml = displayDescription.replace(/\n/g, '<br>');
-      // Use default image if showing preview, otherwise use regular image
-      let imageUrl;
-      if (showPreview) {
-        imageUrl = DEFAULT_IMAGE;
-      } else {
-        imageUrl = getImagePath(location.image);
-      }
-
-      return `
-        <div class="location-card" data-day="${location.day}">
-          <img src="${imageUrl}" alt="Luukku ${location.day}" class="card-image">
-          <div class="day-badge">${location.day}</div>
-          <div class="date">${location.day}. joulukuuta 2025</div>
-          <div class="description">${displayDescriptionHtml}</div>
-        </div>
-      `;
-    }).join('');
+    listContainer.innerHTML = sortedLocations.map(location =>
+      renderCard(location, {
+        variant: 'list',
+        showPreview: Boolean(shouldShowPreview(location))
+      })
+    ).join('');
 
     // Add click handlers for cards
     document.querySelectorAll('.location-card').forEach(card => {
