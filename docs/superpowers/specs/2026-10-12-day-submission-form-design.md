@@ -36,9 +36,8 @@ static (GitHub Pages) and the form delivers its result by email via Web3Forms
   before pasting.
 - Edit mode with a missing `day` or `key`, or a `day` not present in
   `locations`, shows a message to ask for a link instead of the form.
-- New mode: a hidden honeypot field is included. Web3Forms is believed to
-  support a `botcheck` field for this (**unverified**, check docs during
-  implementation). Restricting the access key to the site's domain in the
+- New mode: a hidden honeypot field named `botcheck` is included (documented
+  Web3Forms feature, confirmed by the author). Restricting the access key to the site's domain in the
   Web3Forms dashboard is the second protection. The access key is public in
   `form.js` by design.
 
