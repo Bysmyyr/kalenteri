@@ -98,8 +98,10 @@ Fields sent to Web3Forms:
 
 ## Saving the photo
 
-`pbpaste | node scripts/save-image.js <day>` reads the base64 data URL from
-stdin and writes `img/<day>.jpg`. Images are always named `<day>.jpg`. If an
+`<clipboard command> | node scripts/save-image.js <day>` (for example `wl-paste` on Wayland,
+`xclip -o -selection clipboard` on X11, or `pbpaste` on macOS) reads the base64 data URL from
+stdin and writes `img/<day>.jpg`. The script also accepts raw base64 and base64 hard-wrapped by
+an email client, and refuses anything that is not a JPEG or a day outside 1 to 24. Images are always named `<day>.jpg`. If an
 edit replaces a differently named file (e.g. `3.png`), the old file stays until
 manually deleted. The snippet's `image` value is `"<day>.jpg"`.
 

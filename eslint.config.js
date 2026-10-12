@@ -22,7 +22,8 @@ export default [
         require: "readonly",
         module: "readonly",
         __dirname: "readonly",
-        process: "readonly"
+        process: "readonly",
+        Buffer: "readonly"
       }
     },
     rules: {
