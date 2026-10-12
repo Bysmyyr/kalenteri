@@ -21,6 +21,8 @@
 
   const state = { lat: null, lng: null, imageDataUrl: null };
   let busy = false;
+  let photoToken = 0;
+  let photoPending = false;
 
   const $ = id => document.getElementById(id);
 
@@ -93,7 +95,7 @@
   }
 
   function canSubmit() {
-    return !busy && state.lat !== null && $('dayForm').checkValidity();
+    return !busy && !photoPending && state.lat !== null && $('dayForm').checkValidity();
   }
 
   function refresh() {
@@ -132,19 +134,28 @@
 
   async function onPhotoChange() {
     const file = $('photo').files[0];
+    const token = ++photoToken;
     $('photoError').textContent = '';
     if (!file) {
+      photoPending = false;
       state.imageDataUrl = null;
       refresh();
       return;
     }
+    // Block Send until this resize is done; a newer pick supersedes an older one.
+    photoPending = true;
+    refresh();
     try {
-      state.imageDataUrl = await resizeImage(file);
+      const dataUrl = await resizeImage(file);
+      if (token !== photoToken) return;
+      state.imageDataUrl = dataUrl;
     } catch (err) {
+      if (token !== photoToken) return;
       state.imageDataUrl = null;
       $('photo').value = '';
       $('photoError').textContent = err.message;
     }
+    photoPending = false;
     refresh();
   }
 

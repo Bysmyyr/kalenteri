@@ -26,9 +26,19 @@ function parseImagePayload(text) {
     }
     payload = payload.slice(match[0].length);
   }
+  // = may only appear as 1-2 padding characters at the very end; anything else means the
+  // text was mangled on the way (for example quoted-printable soft line breaks).
+  if (payload.replace(/={1,2}$/, '').includes('=')) {
+    throw new Error('input is not clean base64 (stray = characters)');
+  }
   const buffer = Buffer.from(payload, 'base64');
   if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8 || buffer[2] !== 0xff) {
     throw new Error('data is not a JPEG image');
+  }
+  let end = buffer.length;
+  while (end > 0 && buffer[end - 1] === 0) end--;
+  if (end < 2 || buffer[end - 2] !== 0xff || buffer[end - 1] !== 0xd9) {
+    throw new Error('JPEG is truncated (no end marker); copy the whole image field from the email');
   }
   return buffer;
 }
