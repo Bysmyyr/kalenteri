@@ -92,6 +92,8 @@ Fields sent to Web3Forms:
   edit mode), `description`, `previewDescription` (only if set), `lat`, `lng`. In edit mode it replaces the existing object. In new mode the first line
   is `day: 0, // requested: "<text>"`, with the text flattened to one line so it
   cannot break the code; the author edits the number before pasting.
+  If a photo was chosen in new mode, the image line is `image: "0.jpg", // rename to <day>.jpg`
+  (the day is not known yet), and the author changes it to the real day.
 - `image`: base64 data URL of the resized photo (only if a photo was chosen).
 
 ## Saving the photo
