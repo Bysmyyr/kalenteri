@@ -275,11 +275,10 @@
     return urlParams.get('dev_mode') === 'on';
   }
 
-  // Check if preview_all mode is enabled via URL parameter
-  // This mode shows all locations as they would appear on December 24th
+  // The 2025 calendar is archived: always show every day with its full text,
+  // as the calendar looked on December 24th
   function isPreviewAllMode() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('preview_all') === 'on';
+    return true;
   }
 
   // Check if a day is publicly accessible
