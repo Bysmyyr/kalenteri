@@ -191,6 +191,19 @@ main {
   padding-bottom: 1.5rem;
 }
 
+.location-card .end-note {
+  margin-top: -1rem;
+  padding: 0 1.5rem 1.5rem;
+  font-style: italic;
+  color: #4a5568;
+}
+
+.active-filter {
+  display: block;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
 .location-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);

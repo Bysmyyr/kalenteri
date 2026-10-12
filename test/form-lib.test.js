@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const LS = String.fromCharCode(0x2028);
 const PS = String.fromCharCode(0x2029);
 
-const { sanitizeDescription, flattenComment, roundCoord, buildSnippet } = require('../js/form-lib.js');
+const { sanitizeDescription, flattenComment, roundCoord, buildSnippet, descriptionToEditorHtml, editorHtmlToDescription } = require('../js/form-lib.js');
 
 // Evaluate a snippet as JS the way pasting it into the locations array would.
 function evalSnippet(snippet) {
@@ -97,6 +97,14 @@ describe('buildSnippet', () => {
     assert.equal(Object.keys(obj).join(','), 'day,description,lat,lng');
   });
 
+  it('includes endDay before the coordinates only when given', () => {
+    const withEnd = evalSnippet(buildSnippet({ ...base, mode: 'edit', day: 3, image: null, description: 'a', endDay: 10 }));
+    assert.equal(Object.keys(withEnd).join(','), 'day,description,endDay,lat,lng');
+    assert.equal(withEnd.endDay, 10);
+    const without = evalSnippet(buildSnippet({ ...base, mode: 'edit', day: 3, image: null, description: 'a', endDay: null }));
+    assert.equal('endDay' in without, false);
+  });
+
   it('keeps the existing image name in edit mode without a new photo', () => {
     const obj = evalSnippet(buildSnippet({ ...base, mode: 'edit', day: 3, image: '3.png', description: 'a' }));
     assert.equal(obj.image, '3.png');
@@ -118,5 +126,23 @@ describe('buildSnippet', () => {
   it('sanitises pasted HTML inside the snippet', () => {
     const obj = evalSnippet(buildSnippet({ ...base, mode: 'edit', day: 3, image: null, description: '<img src=x onerror=1><b>a' }));
     assert.equal(obj.description, '&lt;img src=x onerror=1&gt;<b>a</b>');
+  });
+});
+
+describe('rich text box conversion', () => {
+  it('round-trips bold and line breaks', () => {
+    const text = 'Hei <b>maailma</b>\nToinen & <rivi>';
+    const html = descriptionToEditorHtml(text);
+    assert.equal(html, 'Hei <b>maailma</b><br>Toinen &amp; &lt;rivi&gt;');
+    assert.equal(editorHtmlToDescription(html), sanitizeDescription(text));
+  });
+
+  it('turns browser div lines into newlines and keeps empty lines', () => {
+    assert.equal(editorHtmlToDescription('a<div><br></div><div>b</div>'), 'a\n\nb');
+    assert.equal(editorHtmlToDescription('a<div>b</div>'), 'a\nb');
+  });
+
+  it('maps strong to b and drops other markup and nbsp', () => {
+    assert.equal(editorHtmlToDescription('<strong>x</strong>&nbsp;<span style="color:red">y</span>'), '<b>x</b> y');
   });
 });

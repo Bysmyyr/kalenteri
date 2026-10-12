@@ -48,6 +48,18 @@
     updateMapMarkers();
   }
 
+  // A day is active from its own date through endDay (default: the day itself)
+  function isActiveToday(location) {
+    const today = new Date();
+    if (today.getMonth() !== 11) return false;
+    const endDay = Number.isInteger(location.endDay) ? location.endDay : location.day;
+    return location.day <= today.getDate() && today.getDate() <= endDay;
+  }
+
+  function isActiveOnlyMode() {
+    return document.getElementById('activeOnly').checked;
+  }
+
   // Helper function to check if a location should show preview content
   function shouldShowPreview(location) {
     // In preview_all mode, never show preview (show full content)
@@ -111,6 +123,7 @@
 
     // Add new markers for locations
     locations.forEach(location => {
+      if (isActiveOnlyMode() && !isActiveToday(location)) return;
       const dayHasArrived = currentMonth === 11 && location.day <= currentDay;
       const hasPreview = shouldShowPreview(location);
 
@@ -241,6 +254,8 @@
     // Filter locations to show
     const sortedLocations = [...locations]
       .filter(loc => {
+        if (isActiveOnlyMode() && !isActiveToday(loc)) return false;
+
         // In preview_all mode, show all locations
         if (isPreviewAllMode()) return true;
 
@@ -254,6 +269,10 @@
       .sort((a, b) => a.day - b.day);
 
     // If no locations to show, display message
+    if (sortedLocations.length === 0 && isActiveOnlyMode()) {
+      listContainer.innerHTML = '<p style="text-align: center; color: #718096; padding: 2rem;">Tänään ei ole esillä olevia luukkuja.</p>';
+      return;
+    }
     if (sortedLocations.length === 0) {
       listContainer.innerHTML = '<p style="text-align: center; color: #718096; padding: 2rem;">Joulukalenteri avautuu joulukuussa! 🎄</p>';
       return;
@@ -301,6 +320,11 @@
   document.addEventListener('DOMContentLoaded', () => {
     initMap();
     renderLocationsList();
+
+    document.getElementById('activeOnly').addEventListener('change', () => {
+      updateMapMarkers();
+      renderLocationsList();
+    });
 
     // Check if URL has a hash to load specific day
     const hasHash = checkUrlHash();

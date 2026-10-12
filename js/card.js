@@ -42,7 +42,10 @@
     const image = `<img src="${imageUrl}" alt="Luukku ${day}" class="card-image">`;
     const badge = `<div class="day-badge">${day}</div>`;
     const date = `<div class="date">${dateText}</div>`;
-    const desc = `<div class="description">${descriptionHtml}</div>`;
+    // Days people leave up after their date get a note after the description
+    const showEnd = !showPreview && Number.isInteger(location.endDay) && location.endDay > day;
+    const desc = `<div class="description">${descriptionHtml}</div>` +
+      (showEnd ? `<div class="end-note">Esillä ${location.endDay}. joulukuuta asti</div>` : '');
 
     if (opts.variant === 'highlighted') {
       return `<div class="location-card highlighted-card" data-day="${day}">

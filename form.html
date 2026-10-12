@@ -32,14 +32,23 @@
           <input type="text" id="day" name="day" required maxlength="200">
         </label>
 
-        <label>Kuvaus
-          <textarea id="description" name="description" required rows="8" maxlength="3000"></textarea>
-        </label>
-        <p class="hint">Voit lihavoida tekstiä kirjoittamalla &lt;b&gt;näin&lt;/b&gt;. Muut HTML-merkit näytetään tekstinä.</p>
+        <div class="field">
+          <span class="field-label" id="descriptionLabel">Kuvaus</span>
+          <div class="editor-toolbar"><button type="button" class="bold-btn" data-target="description" title="Lihavoi valittu teksti"><b>B</b> Lihavoi</button></div>
+          <div id="description" class="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="descriptionLabel"></div>
+        </div>
+        <p class="hint">Voit lihavoida tekstiä valitsemalla sen ja painamalla Lihavoi-painiketta.</p>
 
-        <label>Ennakkoteksti (valinnainen)
-          <textarea id="previewDescription" name="previewDescription" rows="3" maxlength="600"></textarea>
+        <label>Viimeinen esilläolopäivä (valinnainen)
+          <input type="number" id="endDay" name="endDay" min="1" max="24" step="1" inputmode="numeric">
         </label>
+        <p class="hint">Joulukuun päivä, johon asti luukku on esillä. Jos jätät tyhjäksi, luukku on esillä vain omana päivänään.</p>
+
+        <div class="field">
+          <span class="field-label" id="previewDescriptionLabel">Ennakkoteksti (valinnainen)</span>
+          <div class="editor-toolbar"><button type="button" class="bold-btn" data-target="previewDescription" title="Lihavoi valittu teksti"><b>B</b> Lihavoi</button></div>
+          <div id="previewDescription" class="editor editor-short" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="previewDescriptionLabel"></div>
+        </div>
         <p class="hint">Näkyy kalenterissa ennen luukun päivää, esimerkiksi kellonaika. Jos jätät tyhjäksi, luukku ei näy ennen päivää.</p>
 
         <label>Kuva (valinnainen)

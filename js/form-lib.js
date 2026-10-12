@@ -29,6 +29,34 @@
     return out + '</b>'.repeat(open);
   }
 
+  function escapeHtml(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Description text (with <b> tags and \n) -> HTML for the rich text box.
+  function descriptionToEditorHtml(text) {
+    return String(text || '')
+      .split(/(<\/?b>)/i)
+      .map(part => (/^<\/?b>$/i.test(part) ? part.toLowerCase() : escapeHtml(part)))
+      .join('')
+      .replace(/\r\n?|\n/g, '<br>');
+  }
+
+  // HTML from the rich text box -> description text. Only bold and line breaks survive.
+  function editorHtmlToDescription(html) {
+    const text = String(html || '')
+      .replace(/<(div|p)\b[^>]*>\s*<br\s*\/?>/gi, '\n')
+      .replace(/<(div|p)\b[^>]*>/gi, '\n')
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<(\/?)(b|strong)\b[^>]*>/gi, '<$1b>')
+      .replace(/<(?!\/?b>)[^>]*>/gi, '')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&');
+    return sanitizeDescription(text);
+  }
+
   // One line, safe to place after //. JS \s also matches U+2028/U+2029, which end a // comment.
   function flattenComment(text) {
     return String(text).replace(/\s+/g, ' ').trim();
@@ -57,6 +85,9 @@
     if (preview) {
       entries.push({ text: `previewDescription: ${JSON.stringify(preview)}` });
     }
+    if (Number.isInteger(data.endDay)) {
+      entries.push({ text: `endDay: ${data.endDay}` });
+    }
     entries.push({ text: `lat: ${roundCoord(data.lat)}` });
     entries.push({ text: `lng: ${roundCoord(data.lng)}` });
 
@@ -67,5 +98,5 @@
     return `{\n${lines.join('\n')}\n},`;
   }
 
-  return { sanitizeDescription, flattenComment, roundCoord, buildSnippet };
+  return { descriptionToEditorHtml, editorHtmlToDescription, sanitizeDescription, flattenComment, roundCoord, buildSnippet };
 });

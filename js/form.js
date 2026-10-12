@@ -3,12 +3,14 @@
   'use strict';
 
   const { renderCard } = window.CalendarCard;
-  const { sanitizeDescription, buildSnippet } = window.FormLib;
+  const { descriptionToEditorHtml, editorHtmlToDescription, buildSnippet } = window.FormLib;
 
   const ENDPOINT = 'https://api.web3forms.com/submit';
   const ACCESS_KEY = '212871f3-7df2-4fd7-b65d-3358700e818c';
   const MAX_IMAGE_SIDE = 800;
   const MAX_IMAGE_CHARS = 200000;
+  const MAX_DESCRIPTION = 3000;
+  const MAX_PREVIEW = 600;
 
   const DEFAULT_CENTER = [60.4502, 22.4112];
 
@@ -37,8 +39,16 @@
     $('formIntro').textContent = 'Muokkaa tietoja, tarkista esikatselu ja lähetä lomake.';
     $('dayGroup').hidden = true;
     $('day').required = false;
-    $('description').value = existing.description || '';
-    $('previewDescription').value = existing.previewDescription || '';
+    $('description').innerHTML = descriptionToEditorHtml(existing.description);
+    $('previewDescription').innerHTML = descriptionToEditorHtml(existing.previewDescription);
+    $('endDay').min = String(existing.day);
+    $('endDay').value = Number.isInteger(existing.endDay) ? String(existing.endDay) : '';
+  }
+
+  // Blank or an invalid number means "only on the day itself"
+  function readEndDay() {
+    const value = parseInt($('endDay').value, 10);
+    return Number.isInteger(value) && $('endDay').checkValidity() ? value : null;
   }
 
   function setLocationStatus() {
@@ -71,11 +81,22 @@
     if (hasStart) place(L.latLng(existing.lat, existing.lng));
   }
 
+  function readText(id) {
+    return editorHtmlToDescription($(id).innerHTML);
+  }
+
+  function textIsValid() {
+    const description = readText('description');
+    return description !== '' && description.length <= MAX_DESCRIPTION &&
+      readText('previewDescription').length <= MAX_PREVIEW;
+  }
+
   function currentLocation() {
     return {
       day: isEdit ? existing.day : '?',
-      description: sanitizeDescription($('description').value),
-      previewDescription: sanitizeDescription($('previewDescription').value),
+      description: readText('description'),
+      previewDescription: readText('previewDescription'),
+      endDay: readEndDay() || undefined,
       image: existing ? existing.image : undefined
     };
   }
@@ -95,7 +116,7 @@
   }
 
   function canSubmit() {
-    return !busy && !photoPending && state.lat !== null && $('dayForm').checkValidity();
+    return !busy && !photoPending && state.lat !== null && textIsValid() && $('dayForm').checkValidity();
   }
 
   function refresh() {
@@ -187,14 +208,17 @@
       day: isEdit ? existing.day : null,
       dayText: $('day').value,
       image: snippetImage(),
-      description: $('description').value,
-      previewDescription: $('previewDescription').value,
+      description: readText('description'),
+      previewDescription: readText('previewDescription'),
+      endDay: readEndDay(),
       lat: state.lat,
       lng: state.lng
     });
 
     const formData = new FormData($('dayForm'));
     formData.delete('previewMode');
+    formData.set('description', readText('description'));
+    formData.set('previewDescription', readText('previewDescription'));
     formData.set('access_key', ACCESS_KEY);
     formData.set('mode', isEdit ? 'edit' : 'new');
     formData.set('subject', isEdit
@@ -245,6 +269,22 @@
     }
     setupMode();
     initMap();
+    document.querySelectorAll('.bold-btn').forEach(button => {
+      // mousedown + preventDefault keeps the text selection in the editor
+      button.addEventListener('mousedown', e => e.preventDefault());
+      button.addEventListener('click', () => {
+        $(button.dataset.target).focus();
+        document.execCommand('bold');
+        refresh();
+      });
+    });
+    document.querySelectorAll('.editor').forEach(editor => {
+      // Paste as plain text so no formatting from other apps sneaks in
+      editor.addEventListener('paste', e => {
+        e.preventDefault();
+        document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
+      });
+    });
     $('dayForm').addEventListener('input', refresh);
     $('dayForm').addEventListener('change', refresh);
     $('photo').addEventListener('change', onPhotoChange);

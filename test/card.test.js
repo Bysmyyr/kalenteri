@@ -65,6 +65,14 @@ describe('renderCard extras', () => {
     );
   });
 
+  it('adds an end note after the description only for multi-day cards outside preview', () => {
+    const loc = { day: 3, description: 'a', previewDescription: 'b', endDay: 10 };
+    assert.ok(renderCard(loc).includes('<div class="end-note">Esillä 10. joulukuuta asti</div>'));
+    assert.ok(!renderCard(loc, { showPreview: true }).includes('end-note'));
+    assert.ok(!renderCard({ ...loc, endDay: 3 }).includes('end-note'));
+    assert.ok(!renderCard({ day: 3, description: 'a' }).includes('end-note'));
+  });
+
   it('getImagePath passes through img/ and absolute paths', () => {
     assert.equal(getImagePath('img/x.jpg'), 'img/x.jpg');
     assert.equal(getImagePath('/x.jpg'), '/x.jpg');
