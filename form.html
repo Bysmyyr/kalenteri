@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Luukun lomake – Littoisten Joulukalenteri</title>
+  <link rel="stylesheet" href="css/style.css?v=202511293">
+  <link rel="stylesheet" href="css/form.css?v=1">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1 id="formTitle">🎄 Ehdota luukkua 🎄</h1>
+    <p id="formIntro">Täytä tiedot, valitse sijainti kartalta ja tarkista esikatselu. Lähetä lopuksi lomake, niin ylläpitäjä saa sen sähköpostiin.</p>
+  </header>
+
+  <main>
+    <section id="blocked" class="list-section" hidden>
+      <h2>Linkki ei kelpaa</h2>
+      <p>Tämä muokkauslinkki ei toimi. Pyydä kalenterin ylläpitäjältä uusi linkki.</p>
+    </section>
+
+    <form id="dayForm" novalidate>
+      <section class="list-section form-section">
+        <h2>Luukun tiedot</h2>
+
+        <label id="dayGroup">Mikä päivä? Voit ehdottaa useampaa vaihtoehtoa ja kirjoittaa huomioita.
+          <input type="text" id="day" name="day" required maxlength="200">
+        </label>
+
+        <label>Kuvaus
+          <textarea id="description" name="description" required rows="8" maxlength="3000"></textarea>
+        </label>
+        <p class="hint">Voit lihavoida tekstiä kirjoittamalla &lt;b&gt;näin&lt;/b&gt;. Muut HTML-merkit näytetään tekstinä.</p>
+
+        <label>Ennakkoteksti (valinnainen)
+          <textarea id="previewDescription" name="previewDescription" rows="3" maxlength="600"></textarea>
+        </label>
+        <p class="hint">Näkyy kalenterissa ennen luukun päivää, esimerkiksi kellonaika. Jos jätät tyhjäksi, luukku ei näy ennen päivää.</p>
+
+        <label>Kuva (valinnainen)
+          <input type="file" id="photo" accept="image/*">
+        </label>
+        <p id="photoError" class="status error"></p>
+      </section>
+
+      <section class="map-section">
+        <h2>Sijainti</h2>
+        <p class="hint">Napauta karttaa, niin merkki siirtyy kohtaan. Voit vielä vetää merkkiä.</p>
+        <div id="map"></div>
+        <p id="locationStatus" class="hint">Sijaintia ei ole vielä valittu.</p>
+      </section>
+
+      <section class="list-section form-section">
+        <h2>Esikatselu</h2>
+        <div class="preview-toggle">
+          <label><input type="radio" name="previewMode" value="full" checked> Luukun päivänä</label>
+          <label><input type="radio" name="previewMode" value="before"> Ennen päivää</label>
+        </div>
+        <div id="locationsList"></div>
+      </section>
+
+      <section class="list-section form-section">
+        <h2>Yhteystiedot</h2>
+        <p class="hint">Näitä ei näytetä kalenterissa. Ne tulevat vain ylläpitäjälle.</p>
+        <label>Nimi
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </label>
+        <label>Sähköposti
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </label>
+        <label>Puhelin
+          <input type="tel" id="phone" name="phone" required autocomplete="tel">
+        </label>
+
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display: none;">
+
+        <button type="submit" id="submitBtn" class="submit-btn" disabled>Lähetä</button>
+        <p id="status" class="status" role="status"></p>
+
+        <div id="fallback" class="fallback" hidden>
+          <p class="hint">Voit kopioida tämän tekstin talteen ja toimittaa sen ylläpitäjälle.</p>
+          <textarea id="fallbackText" readonly rows="10"></textarea>
+          <button type="button" id="copyBtn" class="submit-btn">Kopioi teksti</button>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <script src="js/locations.js?v=1"></script>
+  <script src="js/card.js?v=1"></script>
+  <script src="js/form-lib.js?v=1"></script>
+  <script src="js/form.js?v=1"></script>
+</body>
+
+</html>

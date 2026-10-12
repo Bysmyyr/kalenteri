@@ -1,0 +1,81 @@
+[hidden] {
+  display: none !important;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-section label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.form-section input[type="text"],
+.form-section input[type="email"],
+.form-section input[type="tel"],
+.form-section input[type="file"],
+.form-section textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.6rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 400;
+}
+
+.hint {
+  margin: 0.25rem 0 1rem;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.preview-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.preview-toggle label {
+  font-weight: 400;
+}
+
+.preview-note {
+  color: #4a5568;
+  font-style: italic;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 8px;
+  background: #c53030;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status.error {
+  color: #c53030;
+}
+
+.status.success {
+  color: #276749;
+}
+
+.fallback textarea {
+  width: 100%;
+  font-family: monospace;
+}
