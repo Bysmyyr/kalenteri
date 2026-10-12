@@ -3,7 +3,12 @@
   'use strict';
 
   const { renderCard } = window.CalendarCard;
-  const { sanitizeDescription } = window.FormLib;
+  const { sanitizeDescription, buildSnippet } = window.FormLib;
+
+  const ENDPOINT = 'https://api.web3forms.com/submit';
+  const ACCESS_KEY = '<<WEB3FORMS_ACCESS_KEY>>';
+  const MAX_IMAGE_SIDE = 800;
+  const MAX_IMAGE_CHARS = 200000;
 
   const DEFAULT_CENTER = [60.4502, 22.4112];
 
@@ -97,6 +102,131 @@
     $('submitBtn').disabled = !canSubmit();
   }
 
+  // Resize in the browser so the base64 stays small enough for an email text field.
+  // Modern browsers apply EXIF orientation when drawing an <img> to a canvas.
+  async function resizeImage(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = new Image();
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error('Kuvaa ei voitu lukea. Kokeile toista kuvaa.'));
+        img.src = url;
+      });
+      const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.naturalWidth * scale);
+      canvas.height = Math.round(img.naturalHeight * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      let quality = 0.7;
+      let dataUrl = canvas.toDataURL('image/jpeg', quality);
+      while (dataUrl.length > MAX_IMAGE_CHARS && quality > 0.4) {
+        quality -= 0.1;
+        dataUrl = canvas.toDataURL('image/jpeg', quality);
+      }
+      return dataUrl;
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  async function onPhotoChange() {
+    const file = $('photo').files[0];
+    $('photoError').textContent = '';
+    if (!file) {
+      state.imageDataUrl = null;
+      refresh();
+      return;
+    }
+    try {
+      state.imageDataUrl = await resizeImage(file);
+    } catch (err) {
+      state.imageDataUrl = null;
+      $('photo').value = '';
+      $('photoError').textContent = err.message;
+    }
+    refresh();
+  }
+
+  function snippetImage() {
+    if (state.imageDataUrl) return isEdit ? `${existing.day}.jpg` : '0.jpg';
+    return isEdit && existing.image ? existing.image : null;
+  }
+
+  function setBusy(value) {
+    busy = value;
+    $('submitBtn').textContent = value ? 'Lähetetään...' : 'Lähetä';
+    refresh();
+  }
+
+  function showFallback(snippet) {
+    $('fallbackText').value = snippet;
+    $('fallback').hidden = false;
+  }
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    if (!canSubmit()) return;
+    setBusy(true);
+    $('status').className = 'status';
+    $('status').textContent = '';
+
+    const snippet = buildSnippet({
+      mode: isEdit ? 'edit' : 'new',
+      day: isEdit ? existing.day : null,
+      dayText: $('day').value,
+      image: snippetImage(),
+      description: $('description').value,
+      previewDescription: $('previewDescription').value,
+      lat: state.lat,
+      lng: state.lng
+    });
+
+    const formData = new FormData($('dayForm'));
+    formData.delete('previewMode');
+    formData.set('access_key', ACCESS_KEY);
+    formData.set('mode', isEdit ? 'edit' : 'new');
+    formData.set('subject', isEdit
+      ? `Joulukalenteri: muokkaus luukku ${existing.day}`
+      : 'Joulukalenteri: uusi luukkuehdotus');
+    if (isEdit) {
+      formData.set('day', String(existing.day));
+      formData.set('key', editKey);
+    }
+    formData.set('snippet', snippet);
+    if (state.imageDataUrl) formData.set('image', state.imageDataUrl);
+
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData))
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || response.statusText);
+      }
+      $('status').className = 'status success';
+      $('status').textContent = 'Kiitos! Lomake lähetettiin.';
+      Array.from($('dayForm').elements).forEach(el => { el.disabled = true; });
+    } catch (err) {
+      $('status').className = 'status error';
+      $('status').textContent = `Lähetys epäonnistui (${err.message}). Yritä uudelleen tai kopioi teksti alta.`;
+      showFallback(snippet);
+      setBusy(false);
+    }
+  }
+
+  async function copyFallback() {
+    try {
+      await navigator.clipboard.writeText($('fallbackText').value);
+      $('copyBtn').textContent = 'Kopioitu';
+    } catch {
+      $('fallbackText').select();
+    }
+  }
+
+
   function init() {
     if (isEdit && (!existing || !editKey)) {
       showBlocked();
@@ -106,6 +236,9 @@
     initMap();
     $('dayForm').addEventListener('input', refresh);
     $('dayForm').addEventListener('change', refresh);
+    $('photo').addEventListener('change', onPhotoChange);
+    $('dayForm').addEventListener('submit', onSubmit);
+    $('copyBtn').addEventListener('click', copyFallback);
     refresh();
   }
 

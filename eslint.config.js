@@ -23,7 +23,10 @@ export default [
         module: "readonly",
         __dirname: "readonly",
         process: "readonly",
-        Buffer: "readonly"
+        Buffer: "readonly",
+        FormData: "readonly",
+        Image: "readonly",
+        navigator: "readonly"
       }
     },
     rules: {
